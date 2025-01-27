@@ -1,0 +1,93 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build output
+dist/
+build/
+out/
+
+# IDE and Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+debug.log
+
+# Testing
+coverage/
+
+# API keys and secrets
+**/config.js
+**/secrets.json
+
+# Cache directories
+.cache/
+.temp/
+.tmp/
+
+# System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Optional: Backend related (if you add later)
+/server/node_modules/
+/backend/node_modules/
+
+# Optional: Database files
+*.sqlite
+*.db
+
+# Optional: Compiled files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Optional: Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# Optional: OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Google OAuth
+client_secret.json
+credentials.json
+
+# Optional: Package specific
+bower_components/
+jspm_packages/
+
+# Optional: Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock 

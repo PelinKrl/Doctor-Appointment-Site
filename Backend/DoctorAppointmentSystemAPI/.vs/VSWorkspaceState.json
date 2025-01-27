@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\DoctorAppointmentSystemAPI",
+    "\\DoctorAppointmentSystemAPI\\Controllers",
+    "\\DoctorAppointmentSystemAPI\\Database",
+    "\\DoctorAppointmentSystemAPI\\Models"
+  ],
+  "SelectedNode": "\\DoctorAppointmentSystemAPI\\Program.cs",
+  "PreviewInSolutionExplorer": false
+}
