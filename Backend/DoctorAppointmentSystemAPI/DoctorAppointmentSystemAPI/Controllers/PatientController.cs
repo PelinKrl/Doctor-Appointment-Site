@@ -9,29 +9,63 @@ using System.Security.Claims;
 public class PatientsController : ControllerBase
 {
     private readonly IPatientService _patientService;
-    
+
 
     public PatientsController(IPatientService patientService)
     {
         _patientService = patientService;
-        
+
     }
 
-    [HttpGet("search-doctors")]
-    public async Task<ActionResult<IEnumerable<Doctor>>> SearchDoctors([FromQuery] string specialty, [FromQuery] string location)
+    
+    [HttpPost("register")]
+    public async Task<IActionResult> RegisterPatient([FromBody] RegisterPatientDTO patientDto)
     {
-        if (string.IsNullOrEmpty(specialty) && string.IsNullOrEmpty(location))
-        {
-            return BadRequest("Specialty and location parameters are required.");
-        }
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
 
+        try
+        {
+            // Extract FirebaseUserId and Email from authenticated user's claims
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var email = User.FindFirst(ClaimTypes.Email)?.Value ?? patientDto.Email; // Use provided email if not found in claims
+
+            if (string.IsNullOrEmpty(firebaseUserId))
+            {
+                return BadRequest("FirebaseUserId is missing from the request.");
+            }
+
+            // Call the service to register the patient
+            await _patientService.RegisterPatient(firebaseUserId, email, patientDto);
+
+            return Ok(new { Message = "Patient registered successfully." });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(new { Error = ex.Message });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { Error = $"An error occurred while registering the patient: {ex.Message}" });
+        }
+    }
+
+
+
+
+    [HttpGet("search-doctors")]
+    public async Task<ActionResult<IEnumerable<Doctor>>> SearchDoctors([FromQuery] string specialty = null, [FromQuery] string location = null)
+    {
+        // Fetch doctors using the service
         var doctors = await _patientService.SearchDoctorsAsync(specialty, location);
 
+        // Return a 404 if no doctors match
         if (!doctors.Any())
         {
             return NotFound("No doctors found matching the criteria.");
         }
 
+        // Return the matching doctors
         return Ok(doctors);
     }
 
@@ -72,11 +106,27 @@ public class PatientsController : ControllerBase
         }
     }
 
+    [HttpGet("get-appointment/{doctorId}")]
+    public async Task<IActionResult> GetUpcomingAppointments(int doctorId)
+    {
+        try
+        {
+            var appointments = await _patientService.GetUpcomingAppointments(doctorId);
+
+            // Always return a 200 response, even if no appointments are found
+            return Ok(appointments ?? new List<Appointment>());
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"An error occurred: {ex.Message}");
+        }
+    }
+
+
     [HttpGet("specialties")]
     public async Task<ActionResult<IEnumerable<string>>> GetSpecialties()
     {
         var specialties = await _patientService.GetAllSpecialtiesAsync();
         return Ok(specialties);
     }
-
 }

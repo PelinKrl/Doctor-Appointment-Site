@@ -49,16 +49,6 @@
   },
   {
     "ContainingType": "DoctorsController",
-    "Method": "GetUnapprovedDoctors",
-    "RelativePath": "api/doctors",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "DoctorsController",
     "Method": "GetDoctorAvailability",
     "RelativePath": "api/doctors/{doctorId}/availability",
     "HttpMethod": "GET",
@@ -132,6 +122,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "DoctorsController",
+    "Method": "GetUnapprovedDoctors",
+    "RelativePath": "api/doctors/unapproved",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PatientsController",
+    "Method": "GetUpcomingAppointments",
+    "RelativePath": "api/patients/get-appointment/{doctorId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "doctorId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "PatientsController",
     "Method": "MakeAppointment",
     "RelativePath": "api/patients/make-appointment",
@@ -156,6 +172,22 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "PatientsController",
+    "Method": "RegisterPatient",
+    "RelativePath": "api/patients/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patientDto",
+        "Type": "DoctorAppointmentSystemAPI.Models.RegisterPatientDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "PatientsController",

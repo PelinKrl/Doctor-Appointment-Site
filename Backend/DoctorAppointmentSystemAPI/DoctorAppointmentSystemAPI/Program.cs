@@ -1,25 +1,24 @@
 using DoctorAppointmentSystemAPI.Services;
+using FirebaseAdmin;
+using FirebaseAdmin.Auth;
+using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using FirebaseAdmin;
-//using Google.Apis.Auth.OAuth0;
-using MongoDB.Driver;
-using MongoDB.Bson;
-using Google.Apis.Auth.OAuth2;
-using FirebaseAdmin.Auth;
-using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.IdentityModel.Tokens;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Load configuration
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
 // Initialize Firebase Admin SDK
-FirebaseApp.Create(new AppOptions()
+FirebaseApp.Create(new AppOptions
 {
-    Credential = GoogleCredential.FromFile(
-        builder.Configuration["Authentication:Firebase:ServiceAccountKeyPath"]),
+    Credential = GoogleCredential.FromFile(builder.Configuration["Authentication:Firebase:ServiceAccountKeyPath"]),
 });
 
 // Configure MongoDB
@@ -38,22 +37,56 @@ catch (Exception ex)
     Console.WriteLine($"MongoDB connection failed: {ex.Message}");
 }
 
-// Configure Authentication (Firebase-only)
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.Authority = "https://securetoken.google.com/doctor-appointment-syste-42850";
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidIssuer = "https://securetoken.google.com/doctor-appointment-syste-42850",
-            ValidateAudience = true,
-            ValidAudience = "doctor-appointment-syste-42850",
-            ValidateLifetime = true
-        };
-    });
+// Configure Authentication and Authorization
+// Configure Authentication and Authorization
+builder.Services.AddAuthentication(options => 
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    var firebaseProjectId = "doctor-appointment-syste-42850";
+    var adminSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]));
 
-// Configure CORS with production domains
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        // Support multiple issuers
+        ValidIssuers = new[]
+        {
+            $"https://securetoken.google.com/{firebaseProjectId}", // Firebase issuer
+            "your-issuer"  // Your admin token issuer
+        },
+        // Support multiple audiences
+        ValidAudiences = new[]
+        {
+            firebaseProjectId, // Firebase audience
+            "your-audience"    // Your admin token audience
+        },
+        // Support multiple signing keys
+        IssuerSigningKeyResolver = (token, securityToken, kid, validationParameters) =>
+        {
+            // If it's a Firebase token
+            if (securityToken.Issuer.StartsWith("https://securetoken.google.com"))
+            {
+                return GoogleSigningKeys.GetIssuerSigningKeys();
+            }
+            // If it's your admin token
+            return new[] { adminSigningKey };
+        }
+    };
+}); 
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+});
+
+// Configure CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
@@ -79,29 +112,17 @@ builder.Services.AddStackExchangeRedisCache(options =>
     options.InstanceName = "DoctorApp_";
 });
 
-// In Program.cs
-builder.Services.AddScoped<IPatientService>(provider =>
-    new PatientService(
-        provider.GetRequiredService<AppDbContext>(),
-        provider.GetRequiredService<IDistributedCache>(),
-        provider.GetRequiredService<IMongoDatabase>() // Pass MongoDB instance
-    )
-);
-
 // Register Services
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IMongoDatabase>(mongoDatabase);
 builder.Services.AddScoped<IPatientService, PatientService>();
 builder.Services.AddScoped<IDoctorService, DoctorService>();
 builder.Services.AddSingleton<IEmailService, EmailService>();
 builder.Services.AddHttpContextAccessor();
-
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-
-
 
 // Middleware Pipeline
 if (app.Environment.IsDevelopment())
@@ -110,46 +131,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.Use(async (context, next) =>
-{
-    var endpoint = context.GetEndpoint();
-    if (endpoint?.Metadata.GetMetadata<AuthorizeAttribute>() != null)
-    {
-        var firebaseUserId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-        // Check if user is an approved doctor
-        var isApprovedDoctor = await context.RequestServices.GetRequiredService<AppDbContext>()
-            .Doctors
-            .AnyAsync(d => d.FirebaseUserId == firebaseUserId && d.IsApproved);
-
-        if (isApprovedDoctor)
-            context.Items["Role"] = "Doctor";
-        else
-            context.Items["Role"] = "Patient";
-    }
-    await next();
-});
-
 app.UseHttpsRedirection();
-app.UseCors("AllowFrontend"); // Apply CORS policy
-// In Program.cs, before app.UseAuthentication();
-app.Use(async (context, next) =>
-{
-    var endpoint = context.GetEndpoint();
-    if (endpoint?.Metadata.GetMetadata<AuthorizeAttribute>() != null)
-    {
-        var role = context.User.FindFirst(ClaimTypes.Role)?.Value;
-        if (role == null)
-        {
-            context.Response.StatusCode = 401;
-            return;
-        }
-        context.Items["Role"] = role;
-    }
-    await next();
-});
+app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();

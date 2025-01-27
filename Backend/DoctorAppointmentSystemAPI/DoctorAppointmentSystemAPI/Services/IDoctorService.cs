@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System.Numerics;
 using System.Security.Claims;
+using Microsoft.Extensions.Caching.Distributed;
 
 public interface IDoctorService
 {
-    Task<Doctor> RegisterDoctor(RegisterDoctorDTO doctorDto);
+    Task RegisterDoctor(string firebaseUserId, string email, RegisterDoctorDTO doctorDto);
     Task<Doctor> GetDoctorById(int id);
     Task<bool> ApproveDoctor(int doctorId);
     Task<List<Availability>> GetAvailabilityForCurrentWeek(int doctorId);
@@ -18,17 +19,28 @@ public class DoctorService : IDoctorService
 
     private readonly AppDbContext _context;
     private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly IDistributedCache _cache;
 
-    public DoctorService(AppDbContext context, IHttpContextAccessor httpContextAccessor)
+    public DoctorService(AppDbContext context, IHttpContextAccessor httpContextAccessor, IDistributedCache cache)
     {
         _context = context;
         _httpContextAccessor = httpContextAccessor;
+        _cache = cache;
     }
 
 
-    public async Task<Doctor> RegisterDoctor(RegisterDoctorDTO doctorDto)
+    public async Task RegisterDoctor(string firebaseUserId, string email, RegisterDoctorDTO doctorDto)
     {
-        var firebaseUserId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        // Check if the doctor is already registered
+        var existingDoctor = await _context.Doctors
+            .FirstOrDefaultAsync(d => d.FirebaseUserId == firebaseUserId);
+
+        if (existingDoctor != null)
+        {
+            throw new InvalidOperationException("Doctor already registered.");
+        }
+
+        // Create and populate the doctor object
         var doctor = new Doctor
         {
             FirebaseUserId = firebaseUserId,
@@ -36,6 +48,7 @@ public class DoctorService : IDoctorService
             Specialty = doctorDto.Specialty,
             Address = doctorDto.Address,
             IsApproved = false, // Default to unapproved
+            Email = email,
             Availability = doctorDto.Availability.Select(a => new Availability
             {
                 Day = a.Day,
@@ -44,10 +57,15 @@ public class DoctorService : IDoctorService
             }).ToList()
         };
 
+        // Save the doctor to the database
         _context.Doctors.Add(doctor);
         await _context.SaveChangesAsync();
-        return doctor;
+
+        // Invalidate cache for related data
+        var cacheKey = $"doctors_search_{doctorDto.Specialty}_{doctorDto.Address}";
+        await _cache.RemoveAsync(cacheKey);
     }
+
 
     public async Task<Doctor> GetDoctorById(int id)
     {

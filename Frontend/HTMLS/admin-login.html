@@ -69,7 +69,42 @@
                     const data = await response.json();
                     console.log('Response data:', data);
                     localStorage.setItem('adminToken', data.token);
-                    window.location.href = 'admin-panel.html';
+                    
+                    // Decode the JWT token to get role information
+                    try {
+                        const tokenPayload = JSON.parse(atob(data.token.split('.')[1]));
+                        console.log('Token payload:', tokenPayload);
+                        
+                        // Check for role in different possible claim types
+                        const role = tokenPayload.role || 
+                                   tokenPayload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] ||
+                                   tokenPayload.Role;
+                        
+                        console.log('Detected role:', role);
+                        console.log('Setting localStorage items...');
+                        localStorage.setItem('adminToken', data.token);
+                        localStorage.setItem('role', role);
+                        console.log('localStorage items set successfully');
+                        console.log('Current localStorage state:', {
+                            adminToken: localStorage.getItem('adminToken') ? 'exists' : 'null',
+                            role: localStorage.getItem('role')
+                        });
+                        
+                        // Check if user has admin role (case insensitive)
+                        if (role && role.toLowerCase() === 'admin') {
+                            console.log('Admin role confirmed, redirecting to panel...');
+                            window.location.href = './admin-panel.html';
+                        } else {
+                            alert('Unauthorized access. Admin role required.');
+                            localStorage.removeItem('adminToken');
+                            localStorage.removeItem('role');
+                        }
+                    } catch (error) {
+                        console.error('Error parsing token:', error);
+                        alert('Error processing authentication token.');
+                        localStorage.removeItem('adminToken');
+                        localStorage.removeItem('role');
+                    }
                 } else {
                     const errorData = await response.text();
                     console.error('Login failed:', errorData);

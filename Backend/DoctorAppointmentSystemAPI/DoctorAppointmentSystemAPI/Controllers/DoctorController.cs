@@ -25,48 +25,33 @@ public class DoctorsController : ControllerBase
         _cache = cache; // Initialize
     }
 
-
-    [Authorize]
+    
     [HttpPost("register")]
     public async Task<IActionResult> RegisterDoctor([FromBody] RegisterDoctorDTO doctorDto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-        // Check if already registered
-        var existingDoctor = await _context.Doctors
-            .FirstOrDefaultAsync(d => d.FirebaseUserId == firebaseUserId);
-
-        if (existingDoctor != null)
-            return BadRequest("Doctor already registered.");
-
-        var doctor = new Doctor
+        try
         {
-            FirebaseUserId = firebaseUserId,
-            FullName = doctorDto.FullName,
-            Specialty = doctorDto.Specialty,
-            Address = doctorDto.Address,
-            IsApproved = false,
-            Email = User.FindFirst(ClaimTypes.Email)?.Value ?? "No email",
-            Availability = doctorDto.Availability.Select(a => new Availability
-            {
-                Day = a.Day,
-                StartTime = a.StartTime,
-                EndTime = a.EndTime
-            }).ToList()
-        };
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var email = User.FindFirst(ClaimTypes.Email)?.Value ?? "No email";
 
-        _context.Doctors.Add(doctor);
-        await _context.SaveChangesAsync();
+            // Call the service to register the doctor
+            await _doctorService.RegisterDoctor(firebaseUserId, email, doctorDto);
 
-        // Invalidate cache
-        var cacheKey = $"doctors_search_{doctorDto.Specialty}_{doctorDto.Address}";
-        await _cache.RemoveAsync(cacheKey);
-
-        return Ok(new { Message = "Doctor registration pending approval" });
+            return Ok(new { Message = "Doctor registration pending approval" });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, "An error occurred while registering the doctor.");
+        }
     }
+
 
     [HttpGet("{doctorId}/availability")]
     public async Task<IActionResult> GetDoctorAvailability(int doctorId)
@@ -110,16 +95,23 @@ public class DoctorsController : ControllerBase
         var approvedDoctors = await _doctorService.GetApprovedDoctors();
         return Ok(approvedDoctors);
     }
-
-
-    [HttpGet]
+    [HttpGet("unapproved")]
     [Authorize(Roles = "Admin")]
     public async Task<IActionResult> GetUnapprovedDoctors()
     {
-        var doctors = await _context.Doctors
-            .Where(d => !d.IsApproved)
-            .ToListAsync();
-        return Ok(doctors);
+        // Log user info
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var role = User.FindFirst(ClaimTypes.Role)?.Value;
+        Console.WriteLine($"UserId: {userId}, Role: {role}");
+
+        if (role != "Admin")
+        {
+            return Forbid("Access Denied: You are not an Admin.");
+        }
+
+        var unapprovedDoctors = await _context.Doctors.Where(d => !d.IsApproved).ToListAsync();
+        return Ok(unapprovedDoctors);
     }
+
 
 }

@@ -81,18 +81,50 @@
             const provider = new firebase.auth.GoogleAuthProvider();
             
             firebase.auth().signInWithPopup(provider)
-                .then((result) => {
+                .then(async (result) => {
                     const user = result.user;
                     console.log('Successfully signed in:', user);
-                    // Store user info in localStorage
+                    
+                    // Get Firebase token
+                    const token = await user.getIdToken();
+                    
+                    // Store user info and token in localStorage
                     localStorage.setItem('user', JSON.stringify({
                         displayName: user.displayName,
                         email: user.email,
                         photoURL: user.photoURL,
                         uid: user.uid
                     }));
-                    // Redirect to appointment page
-                    window.location.href = 'appointment_page.html';
+                    localStorage.setItem('token', token);
+
+                    // Register patient in backend
+                    try {
+                        const response = await fetch('https://localhost:7285/api/patients/register', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json',
+                                'Authorization': `Bearer ${token}`
+                            },
+                            body: JSON.stringify({
+                                fullName: user.displayName,
+                                email: user.email,
+                                firebaseUserId: user.uid
+                            })
+                        });
+
+                        if (response.ok) {
+                            console.log('Patient registered successfully');
+                            window.location.href = 'appointment_page.html';
+                        } else {
+                            const errorData = await response.text();
+                            console.error('Patient registration failed:', errorData);
+                            alert('Registration failed. Please try again.');
+                        }
+                    } catch (error) {
+                        console.error('Error registering patient:', error);
+                        alert('Connection failed. Please check if the backend server is running.');
+                    } 
                 })
                 .catch((error) => {
                     console.error('Error signing in:', error);

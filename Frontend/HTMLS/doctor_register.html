@@ -10,6 +10,8 @@
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <!-- Add SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .login-container {
             max-width: 800px;  /* Increased from default */
@@ -219,15 +221,20 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="address">Street Address:</label>
+                    <input type="text" id="address" required placeholder="Enter your street address">
+                </div>
+
+                <div class="form-group">
                     <label>Available Days:</label>
                     <div class="days-selection">
-                        <label><input type="checkbox" name="days" value="mon"> Mon</label>
-                        <label><input type="checkbox" name="days" value="tue"> Tue</label>
-                        <label><input type="checkbox" name="days" value="wed"> Wed</label>
-                        <label><input type="checkbox" name="days" value="thu"> Thu</label>
-                        <label><input type="checkbox" name="days" value="fri"> Fri</label>
-                        <label><input type="checkbox" name="days" value="sat"> Sat</label>
-                        <label><input type="checkbox" name="days" value="sun"> Sun</label>
+                        <label><input type="checkbox" name="days" value="Monday"> Mon</label>
+                        <label><input type="checkbox" name="days" value="Tuesday"> Tue</label>
+                        <label><input type="checkbox" name="days" value="Wednesday"> Wed</label>
+                        <label><input type="checkbox" name="days" value="Thursday"> Thu</label>
+                        <label><input type="checkbox" name="days" value="Friday"> Fri</label>
+                        <label><input type="checkbox" name="days" value="Saturday"> Sat</label>
+                        <label><input type="checkbox" name="days" value="Sunday"> Sun</label>
                     </div>
                 </div>
 
@@ -248,12 +255,13 @@
     <script>
         // Initialize Firebase
         const firebaseConfig = {
-            apiKey: "AIzaSyBxJNge8vHCKzxeRHHpR_KlMp7VSyZrFEo",
-            authDomain: "doctor-appointment-site-407509.firebaseapp.com",
-            projectId: "doctor-appointment-site-407509",
-            storageBucket: "doctor-appointment-site-407509.appspot.com",
-            messagingSenderId: "595972852770",
-            appId: "1:595972852770:web:c2e3dd115a082b0d4e7c60"
+            apiKey: "AIzaSyD75N454SrHDavV6kNvOq0XmjmXPQ9BYvQ",
+            authDomain: "doctor-appointment-syste-42850.firebaseapp.com",
+            projectId: "doctor-appointment-syste-42850",
+            storageBucket: "doctor-appointment-syste-42850.firebasestorage.app",
+            messagingSenderId: "533467033282",
+            appId: "1:533467033282:web:3f8e6d38839d9c9129155b",
+            measurementId: "G-RGTJMLT6VF"
         };
 
         firebase.initializeApp(firebaseConfig);
@@ -263,6 +271,30 @@
         // Get elements
         const googleSignInBtn = document.getElementById('google-sign-in');
         const doctorDetails = document.getElementById('doctor-details');
+
+        // Fetch cities on page load
+        async function fetchCities() {
+            try {
+                const response = await fetch('https://turkiyeapi.dev/api/v1/provinces');
+                const data = await response.json();
+                
+                const citySelect = document.getElementById('city');
+                citySelect.innerHTML = '<option value="">Select City</option>';
+                
+                data.data.sort((a, b) => a.name.localeCompare(b.name)).forEach(province => {
+                    const option = document.createElement('option');
+                    option.value = province.id;
+                    option.textContent = province.name;
+                    citySelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error fetching cities:', error);
+                alert('Failed to fetch cities. Please try again.');
+            }
+        }
+
+        // Call fetchCities when the page loads
+        document.addEventListener('DOMContentLoaded', fetchCities);
 
         // Handle Google Sign-in
         googleSignInBtn.addEventListener('click', async () => {
@@ -294,7 +326,7 @@
             if (!provinceId) return;
 
             try {
-                const response = await fetch(`https://turkiyeapi.dev/api/v1/provinces/${provinceId}/districts`);
+                const response = await fetch(`https://turkiyeapi.dev/api/v1/districts?provinceId=${provinceId}`);
                 const data = await response.json();
                 
                 const townSelect = document.getElementById('town');
@@ -316,38 +348,66 @@
         document.getElementById('doctorRegistrationForm').addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const doctorData = {
-                email: localStorage.getItem('doctorEmail'),
-                fullName: document.getElementById('fullname').value,
-                specialty: document.getElementById('areaOfInterest').value,
-                city: document.getElementById('city').options[document.getElementById('city').selectedIndex].text,
-                town: document.getElementById('town').value,
-                availability: {
-                    days: Array.from(document.querySelectorAll('input[name="days"]:checked')).map(cb => cb.value),
-                    startTime: document.getElementById('startTime').value,
-                    endTime: document.getElementById('endTime').value
-                },
-                googleToken: localStorage.getItem('doctorToken'),
-                isApproved: false
+            const cityText = document.getElementById('city').options[document.getElementById('city').selectedIndex].text;
+            const townText = document.getElementById('town').value;
+            const streetAddress = document.getElementById('address').value;
+            
+            // Combine address components
+            const fullAddress = `${streetAddress}, ${townText}, ${cityText}`;
+
+            // Convert day strings to DayOfWeek enum values (0 = Sunday, 1 = Monday, etc.)
+            const dayToNumber = {
+                'Sunday': 0,
+                'Monday': 1,
+                'Tuesday': 2,
+                'Wednesday': 3,
+                'Thursday': 4,
+                'Friday': 5,
+                'Saturday': 6
+            };
+
+            const requestData = {
+                FullName: document.getElementById('fullname').value,
+                Specialty: document.getElementById('areaOfInterest').value,
+                Address: fullAddress,
+                GoogleToken: localStorage.getItem('doctorToken'),
+                Availability: Array.from(document.querySelectorAll('input[name="days"]:checked')).map(cb => ({
+                    Day: dayToNumber[cb.value],
+                    StartTime: document.getElementById('startTime').value + ':00', // Add seconds for TimeSpan format
+                    EndTime: document.getElementById('endTime').value + ':00'  // Add seconds for TimeSpan format
+                }))
             };
 
             try {
+                console.log('Sending data:', JSON.stringify(requestData, null, 2)); // Debug log
                 const response = await fetch('https://localhost:7285/api/doctors/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Accept': 'application/json'
+                        'Accept': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('doctorToken')}` // Add token to headers
                     },
-                    body: JSON.stringify(doctorData)
+                    body: JSON.stringify(requestData)
                 });
 
                 if (response.ok) {
-                    alert('Registration successful! Please wait for admin approval.');
-                    window.location.href = 'index.html';
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Registration Successful!',
+                        text: 'Please wait for admin approval.',
+                        timer: 3000,
+                        showConfirmButton: false
+                    }).then(() => {
+                        window.location.href = 'index.html';
+                    });
                 } else {
                     const errorData = await response.text();
                     console.error('Registration failed:', errorData);
-                    alert('Registration failed. Please try again.');
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Registration Failed',
+                        text: 'Please try again.'
+                    });
                 }
             } catch (error) {
                 console.error('Error:', error);
