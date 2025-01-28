@@ -1,3 +1,5 @@
+import apiClient from '../js/api.js';
+
 // DOM Elements
 const googleSignInBtn = document.getElementById('google-sign-in');
 const userInfoDiv = document.getElementById('user-info');
@@ -224,4 +226,63 @@ document.getElementById('city').addEventListener('change', function(e) {
             townSelect.appendChild(option);
         });
     }
-}); 
+});
+
+export async function handlePatientLogin(email, password) {
+    try {
+        const response = await apiClient.patientLogin({ email, password });
+        if (response.token) {
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('userType', 'patient');
+            return response;
+        }
+        throw new Error('Login failed');
+    } catch (error) {
+        console.error('Patient login error:', error);
+        throw error;
+    }
+}
+
+export async function handleDoctorLogin(email, password) {
+    try {
+        const response = await apiClient.doctorLogin({ email, password });
+        if (response.token) {
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('userType', 'doctor');
+            return response;
+        }
+        throw new Error('Login failed');
+    } catch (error) {
+        console.error('Doctor login error:', error);
+        throw error;
+    }
+}
+
+export async function handleAdminLogin(email, password) {
+    try {
+        const response = await apiClient.adminLogin({ email, password });
+        if (response.token) {
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('userType', 'admin');
+            return response;
+        }
+        throw new Error('Login failed');
+    } catch (error) {
+        console.error('Admin login error:', error);
+        throw error;
+    }
+}
+
+export function logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userType');
+    window.location.href = '/';
+}
+
+export function isAuthenticated() {
+    return !!localStorage.getItem('token');
+}
+
+export function getUserType() {
+    return localStorage.getItem('userType');
+} 

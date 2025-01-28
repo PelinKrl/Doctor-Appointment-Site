@@ -10,7 +10,7 @@ namespace DoctorAppointmentSystemAPI.Services
     {
         Task<IEnumerable<Doctor>> SearchDoctorsAsync(string specialty, string location);
         Task<Appointment> MakeAppointmentAsync(Appointment appointment);
-        Task<Review> AddReviewAsync(string doctorId, Review review);
+       
         Task<List<string>> GetAllSpecialtiesAsync();
         Task<List<Appointment>> GetUpcomingAppointments(int doctorId);
         Task RegisterPatient(string firebaseUserId, string email, RegisterPatientDTO patientDto);
@@ -101,59 +101,30 @@ namespace DoctorAppointmentSystemAPI.Services
         public async Task<Appointment> MakeAppointmentAsync(Appointment appointment)
         {
             await using var transaction = await _context.Database.BeginTransactionAsync();
-
             try
             {
-                // Verify doctor availability
-                var doctor = await _context.Doctors
-                    .Include(d => d.Availability)
-                    .Include(d => d.Appointments)
-                    .FirstOrDefaultAsync(d => d.Id == appointment.DoctorId);
+                // Begin a transaction for safety
+                
 
-                if (doctor == null)
-                    throw new ArgumentException("Doctor not found");
-
-                // Check availability slot
-                var isAvailable = doctor.Availability.Any(a =>
-                    a.Day == appointment.AppointmentDate.DayOfWeek &&
-                    appointment.AppointmentDate.TimeOfDay >= a.StartTime &&
-                    appointment.AppointmentDate.TimeOfDay <= a.EndTime);
-
-                if (!isAvailable)
-                    throw new ArgumentException("Doctor not available at this time");
-
-                // Check existing appointments
-                var hasConflict = doctor.Appointments.Any(a =>
-                    a.AppointmentDate == appointment.AppointmentDate);
-
-                if (hasConflict)
-                    throw new ArgumentException("Time slot already booked");
-
+                // Add the appointment to the database
                 _context.Appointments.Add(appointment);
                 await _context.SaveChangesAsync();
+
+                // Commit the transaction
                 await transaction.CommitAsync();
 
                 return appointment;
             }
             catch
             {
+                // Rollback if any errors occur
                 await transaction.RollbackAsync();
                 throw;
             }
         }
 
 
-        public async Task<Review> AddReviewAsync(string doctorId, Review review)
-        {
-            if (review == null || doctorId != review.DoctorId)
-            {
-                throw new ArgumentException("Invalid review data: Doctor ID mismatch.");
-            }
-
-            var collection = _mongoDatabase.GetCollection<Review>("Reviews");
-            await collection.InsertOneAsync(review);
-            return review;
-        }
+      
     }
 
 }

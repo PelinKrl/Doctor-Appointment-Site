@@ -1,0 +1,143 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\egebi\\source\\repos\\CommentsService\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3C1CEDBE-2AD1-4D7C-8DAF-A4F04B6498CF}|CommentsService\\CommentsService.csproj|c:\\users\\egebi\\source\\repos\\commentsservice\\commentsservice\\controllers\\reviewcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C1CEDBE-2AD1-4D7C-8DAF-A4F04B6498CF}|CommentsService\\CommentsService.csproj|solutionrelative:commentsservice\\controllers\\reviewcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C1CEDBE-2AD1-4D7C-8DAF-A4F04B6498CF}|CommentsService\\CommentsService.csproj|c:\\users\\egebi\\source\\repos\\commentsservice\\commentsservice\\services\\reviewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C1CEDBE-2AD1-4D7C-8DAF-A4F04B6498CF}|CommentsService\\CommentsService.csproj|solutionrelative:commentsservice\\services\\reviewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C1CEDBE-2AD1-4D7C-8DAF-A4F04B6498CF}|CommentsService\\CommentsService.csproj|c:\\users\\egebi\\source\\repos\\commentsservice\\commentsservice\\models\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C1CEDBE-2AD1-4D7C-8DAF-A4F04B6498CF}|CommentsService\\CommentsService.csproj|solutionrelative:commentsservice\\models\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C1CEDBE-2AD1-4D7C-8DAF-A4F04B6498CF}|CommentsService\\CommentsService.csproj|c:\\users\\egebi\\source\\repos\\commentsservice\\commentsservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C1CEDBE-2AD1-4D7C-8DAF-A4F04B6498CF}|CommentsService\\CommentsService.csproj|solutionrelative:commentsservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C1CEDBE-2AD1-4D7C-8DAF-A4F04B6498CF}|CommentsService\\CommentsService.csproj|c:\\users\\egebi\\source\\repos\\commentsservice\\commentsservice\\models\\mongodbsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C1CEDBE-2AD1-4D7C-8DAF-A4F04B6498CF}|CommentsService\\CommentsService.csproj|solutionrelative:commentsservice\\models\\mongodbsettings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C1CEDBE-2AD1-4D7C-8DAF-A4F04B6498CF}|CommentsService\\CommentsService.csproj|c:\\users\\egebi\\source\\repos\\commentsservice\\commentsservice\\commentsservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{3C1CEDBE-2AD1-4D7C-8DAF-A4F04B6498CF}|CommentsService\\CommentsService.csproj|solutionrelative:commentsservice\\commentsservice.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C1CEDBE-2AD1-4D7C-8DAF-A4F04B6498CF}|CommentsService\\CommentsService.csproj|c:\\users\\egebi\\source\\repos\\commentsservice\\commentsservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3C1CEDBE-2AD1-4D7C-8DAF-A4F04B6498CF}|CommentsService\\CommentsService.csproj|solutionrelative:commentsservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 733,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ReviewController.cs",
+              "DocumentMoniker": "C:\\Users\\egebi\\source\\repos\\CommentsService\\CommentsService\\Controllers\\ReviewController.cs",
+              "RelativeDocumentMoniker": "CommentsService\\Controllers\\ReviewController.cs",
+              "ToolTip": "C:\\Users\\egebi\\source\\repos\\CommentsService\\CommentsService\\Controllers\\ReviewController.cs",
+              "RelativeToolTip": "CommentsService\\Controllers\\ReviewController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-28T12:31:15.135Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\egebi\\source\\repos\\CommentsService\\CommentsService\\Program.cs",
+              "RelativeDocumentMoniker": "CommentsService\\Program.cs",
+              "ToolTip": "C:\\Users\\egebi\\source\\repos\\CommentsService\\CommentsService\\Program.cs",
+              "RelativeToolTip": "CommentsService\\Program.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAAB4AAABTAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-28T12:17:51.684Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MongoDBSettings.cs",
+              "DocumentMoniker": "C:\\Users\\egebi\\source\\repos\\CommentsService\\CommentsService\\Models\\MongoDBSettings.cs",
+              "RelativeDocumentMoniker": "CommentsService\\Models\\MongoDBSettings.cs",
+              "ToolTip": "C:\\Users\\egebi\\source\\repos\\CommentsService\\CommentsService\\Models\\MongoDBSettings.cs",
+              "RelativeToolTip": "CommentsService\\Models\\MongoDBSettings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-28T12:17:00.809Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ReviewService.cs",
+              "DocumentMoniker": "C:\\Users\\egebi\\source\\repos\\CommentsService\\CommentsService\\Services\\ReviewService.cs",
+              "RelativeDocumentMoniker": "CommentsService\\Services\\ReviewService.cs",
+              "ToolTip": "C:\\Users\\egebi\\source\\repos\\CommentsService\\CommentsService\\Services\\ReviewService.cs",
+              "RelativeToolTip": "CommentsService\\Services\\ReviewService.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAkwDwAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-28T12:15:52.643Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Review.cs",
+              "DocumentMoniker": "C:\\Users\\egebi\\source\\repos\\CommentsService\\CommentsService\\Models\\Review.cs",
+              "RelativeDocumentMoniker": "CommentsService\\Models\\Review.cs",
+              "ToolTip": "C:\\Users\\egebi\\source\\repos\\CommentsService\\CommentsService\\Models\\Review.cs",
+              "RelativeToolTip": "CommentsService\\Models\\Review.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-28T12:09:51.713Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CommentsService",
+              "DocumentMoniker": "C:\\Users\\egebi\\source\\repos\\CommentsService\\CommentsService\\CommentsService.csproj",
+              "RelativeDocumentMoniker": "CommentsService\\CommentsService.csproj",
+              "ToolTip": "C:\\Users\\egebi\\source\\repos\\CommentsService\\CommentsService\\CommentsService.csproj",
+              "RelativeToolTip": "CommentsService\\CommentsService.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-01-28T12:09:20.256Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\egebi\\source\\repos\\CommentsService\\CommentsService\\appsettings.json",
+              "RelativeDocumentMoniker": "CommentsService\\appsettings.json",
+              "ToolTip": "C:\\Users\\egebi\\source\\repos\\CommentsService\\CommentsService\\appsettings.json",
+              "RelativeToolTip": "CommentsService\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-01-28T12:05:49.44Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

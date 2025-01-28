@@ -191,37 +191,6 @@
   },
   {
     "ContainingType": "PatientsController",
-    "Method": "AddReview",
-    "RelativePath": "api/patients/reviews/{doctorId}",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "doctorId",
-        "Type": "System.String",
-        "IsRequired": true
-      },
-      {
-        "Name": "review",
-        "Type": "DoctorAppointmentSystemAPI.Models.Review",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "DoctorAppointmentSystemAPI.Models.Review",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "PatientsController",
     "Method": "SearchDoctors",
     "RelativePath": "api/patients/search-doctors",
     "HttpMethod": "GET",
@@ -270,15 +239,5 @@
         "StatusCode": 200
       }
     ]
-  },
-  {
-    "ContainingType": "ReviewsController",
-    "Method": "GetReviews",
-    "RelativePath": "api/Reviews",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
   }
 ]

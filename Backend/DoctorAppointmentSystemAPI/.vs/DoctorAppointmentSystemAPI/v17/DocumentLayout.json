@@ -3,76 +3,64 @@
   "WorkspaceRootPath": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\services\\ipatientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\services\\ipatientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{247F1082-50B9-4D90-A2E7-27AA730F05C1}|..\\..\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\doctorappointmentapigateway\\doctorappointmentapigateway\\ocelot.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\controllers\\patientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\controllers\\patientcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\controllers\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\controllers\\doctorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\models\\registerpatientdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\models\\registerpatientdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\models\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\models\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\models\\registerdoctordto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\models\\registerdoctordto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\models\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\models\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{247F1082-50B9-4D90-A2E7-27AA730F05C1}|..\\..\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\doctorappointmentapigateway\\doctorappointmentapigateway\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\services\\idoctorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\services\\idoctorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\models\\appointment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\services\\googlesigningkeys.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\services\\googlesigningkeys.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2BF3D007-D416-4BD9-AEAB-0CA9C64A2E11}|..\\..\\..\\..\\..\\Desktop\\CommentsService\\CommentsService\\CommentsService.csproj|c:\\users\\murat\\desktop\\commentsservice\\commentsservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\models\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\models\\review.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{247F1082-50B9-4D90-A2E7-27AA730F05C1}|..\\..\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\doctorappointmentapigateway\\doctorappointmentapigateway\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\models\\adminloginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\models\\adminloginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\models\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\models\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\database\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\database\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\controllers\\reviewscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\controllers\\reviewscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\services\\ipatientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\services\\ipatientservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\models\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\models\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\models\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\models\\patient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\services\\googlesigningkeys.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\services\\googlesigningkeys.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\models\\adminloginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|solutionrelative:doctorappointmentsystemapi\\models\\adminloginrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{31D50D9E-7A79-4B78-B2E8-767B4A396D93}|DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj|c:\\users\\murat\\documents\\github\\doctor-appointment-site\\backend\\doctorappointmentsystemapi\\doctorappointmentsystemapi\\services\\iemailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -90,89 +78,101 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "DoctorController.cs",
-              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Controllers\\DoctorController.cs",
-              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Controllers\\DoctorController.cs",
-              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Controllers\\DoctorController.cs",
-              "RelativeToolTip": "DoctorAppointmentSystemAPI\\Controllers\\DoctorController.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAUwCkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-23T16:22:01.405Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Appointment.cs",
-              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Models\\Appointment.cs",
-              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Models\\Appointment.cs",
-              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Models\\Appointment.cs",
-              "RelativeToolTip": "DoctorAppointmentSystemAPI\\Models\\Appointment.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-23T16:22:21.025Z",
+              "DocumentIndex": 6,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\murat\\Desktop\\CommentsService\\CommentsService\\appsettings.json",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Desktop\\CommentsService\\CommentsService\\appsettings.json",
+              "ToolTip": "C:\\Users\\murat\\Desktop\\CommentsService\\CommentsService\\appsettings.json",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Desktop\\CommentsService\\CommentsService\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-01-28T17:14:43.932Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "IDoctorService.cs",
-              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Services\\IDoctorService.cs",
-              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Services\\IDoctorService.cs",
-              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Services\\IDoctorService.cs",
-              "RelativeToolTip": "DoctorAppointmentSystemAPI\\Services\\IDoctorService.cs",
-              "ViewState": "AgIAAFUAAAAAAAAAAAAqwGIAAAAFAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway\\Program.cs",
+              "RelativeDocumentMoniker": "..\\..\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway\\Program.cs",
+              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway\\Program.cs",
+              "RelativeToolTip": "..\\..\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-23T16:22:33.024Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Patient.cs",
-              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Models\\Patient.cs",
-              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Models\\Patient.cs",
-              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Models\\Patient.cs",
-              "RelativeToolTip": "DoctorAppointmentSystemAPI\\Models\\Patient.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-25T15:59:23.192Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Doctor.cs",
-              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Models\\Doctor.cs",
-              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Models\\Doctor.cs",
-              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Models\\Doctor.cs",
-              "RelativeToolTip": "DoctorAppointmentSystemAPI\\Models\\Doctor.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-23T16:22:23.022Z",
+              "WhenOpened": "2025-01-28T15:55:23.016Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "IPatientService.cs",
-              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Services\\IPatientService.cs",
-              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Services\\IPatientService.cs",
-              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Services\\IPatientService.cs",
-              "RelativeToolTip": "DoctorAppointmentSystemAPI\\Services\\IPatientService.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAuwDUAAAAMAAAAAAAAAA==",
+              "Title": "ocelot.json",
+              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway\\ocelot.json",
+              "RelativeDocumentMoniker": "..\\..\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway\\ocelot.json",
+              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway\\ocelot.json",
+              "RelativeToolTip": "..\\..\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway\\ocelot.json",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAB0AAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-01-28T15:53:27.599Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DoctorController.cs",
+              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Controllers\\DoctorController.cs",
+              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Controllers\\DoctorController.cs",
+              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Controllers\\DoctorController.cs",
+              "RelativeToolTip": "DoctorAppointmentSystemAPI\\Controllers\\DoctorController.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAuwCgAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-23T16:22:39.728Z",
+              "WhenOpened": "2025-01-28T15:47:10.029Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Program.cs",
+              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Program.cs",
+              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Program.cs",
+              "RelativeToolTip": "DoctorAppointmentSystemAPI\\Program.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAmwH0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-22T14:23:46.024Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\appsettings.json",
+              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\appsettings.json",
+              "RelativeToolTip": "DoctorAppointmentSystemAPI\\appsettings.json",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAACAAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-01-22T14:27:55.564Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "DoctorAppointmentSystemAPI\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAGoAAAAAAAAAAAAAAHAAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-22T17:29:32.21Z",
               "EditorCaption": ""
             },
             {
@@ -183,66 +183,53 @@
               "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Controllers\\PatientController.cs",
               "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Controllers\\PatientController.cs",
               "RelativeToolTip": "DoctorAppointmentSystemAPI\\Controllers\\PatientController.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAqwCYAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAAAEoAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-23T14:54:17.421Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "RegisterDoctorDTO.cs",
-              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Models\\RegisterDoctorDTO.cs",
-              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Models\\RegisterDoctorDTO.cs",
-              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Models\\RegisterDoctorDTO.cs",
-              "RelativeToolTip": "DoctorAppointmentSystemAPI\\Models\\RegisterDoctorDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAvAAAAAAAAAA==",
+              "DocumentIndex": 10,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Database\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Database\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Database\\AppDbContext.cs",
+              "RelativeToolTip": "DoctorAppointmentSystemAPI\\Database\\AppDbContext.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAswA4AAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-23T16:22:28.934Z",
+              "WhenOpened": "2025-01-22T17:31:47.739Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "RegisterPatientDTO.cs",
-              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Models\\RegisterPatientDTO.cs",
-              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Models\\RegisterPatientDTO.cs",
-              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Models\\RegisterPatientDTO.cs",
-              "RelativeToolTip": "DoctorAppointmentSystemAPI\\Models\\RegisterPatientDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Title": "IDoctorService.cs",
+              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Services\\IDoctorService.cs",
+              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Services\\IDoctorService.cs",
+              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Services\\IDoctorService.cs",
+              "RelativeToolTip": "DoctorAppointmentSystemAPI\\Services\\IDoctorService.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAMwCcAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-27T19:53:46.949Z",
+              "WhenOpened": "2025-01-28T15:47:04.406Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Program.cs",
-              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Program.cs",
-              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Program.cs",
-              "RelativeToolTip": "DoctorAppointmentSystemAPI\\Program.cs",
-              "ViewState": "AgIAAG0AAAAAAAAAAAAAACIAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-22T14:23:46.024Z",
+              "DocumentIndex": 7,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway\\appsettings.json",
+              "RelativeDocumentMoniker": "..\\..\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway\\appsettings.json",
+              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway\\appsettings.json",
+              "RelativeToolTip": "..\\..\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway\\appsettings.json",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-01-28T17:14:52.636Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 15,
-              "Title": "Admin.cs",
-              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Models\\Admin.cs",
-              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Models\\Admin.cs",
-              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Models\\Admin.cs",
-              "RelativeToolTip": "DoctorAppointmentSystemAPI\\Models\\Admin.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-26T10:55:29.491Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
               "Title": "AdminLoginRequest.cs",
               "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Models\\AdminLoginRequest.cs",
               "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Models\\AdminLoginRequest.cs",
@@ -250,51 +237,50 @@
               "RelativeToolTip": "DoctorAppointmentSystemAPI\\Models\\AdminLoginRequest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-26T13:51:03.273Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Database\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Database\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Database\\AppDbContext.cs",
-              "RelativeToolTip": "DoctorAppointmentSystemAPI\\Database\\AppDbContext.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAmwDIAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-22T17:31:47.739Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-26T13:51:03.273Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 11,
-              "Title": "Review.cs",
-              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Models\\Review.cs",
-              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Models\\Review.cs",
-              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Models\\Review.cs",
-              "RelativeToolTip": "DoctorAppointmentSystemAPI\\Models\\Review.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAAAAcAAAAQAAAAAAAAAA==",
+              "Title": "IPatientService.cs",
+              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Services\\IPatientService.cs",
+              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Services\\IPatientService.cs",
+              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Services\\IPatientService.cs",
+              "RelativeToolTip": "DoctorAppointmentSystemAPI\\Services\\IPatientService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-23T16:22:31.021Z",
+              "WhenOpened": "2025-01-28T15:46:41.525Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 13,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "DoctorAppointmentSystemAPI\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAFsAAAAAAAAAAAAWwGcAAAByAAAAAAAAAA==",
+              "Title": "Patient.cs",
+              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Models\\Patient.cs",
+              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Models\\Patient.cs",
+              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Models\\Patient.cs",
+              "RelativeToolTip": "DoctorAppointmentSystemAPI\\Models\\Patient.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-22T17:29:32.21Z",
+              "WhenOpened": "2025-01-28T15:47:20.728Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
+              "Title": "Doctor.cs",
+              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Models\\Doctor.cs",
+              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Models\\Doctor.cs",
+              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Models\\Doctor.cs",
+              "RelativeToolTip": "DoctorAppointmentSystemAPI\\Models\\Doctor.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-28T15:48:08.348Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "GoogleSigningKeys.cs",
               "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Services\\GoogleSigningKeys.cs",
               "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Services\\GoogleSigningKeys.cs",
@@ -302,25 +288,11 @@
               "RelativeToolTip": "DoctorAppointmentSystemAPI\\Services\\GoogleSigningKeys.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-27T14:22:17.434Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-27T14:22:17.434Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\appsettings.json",
-              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\appsettings.json",
-              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\appsettings.json",
-              "RelativeToolTip": "DoctorAppointmentSystemAPI\\appsettings.json",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABQAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-01-22T14:27:55.564Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 17,
               "Title": "GoogleLoginRequest.cs",
               "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Models\\GoogleLoginRequest.cs",
               "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Models\\GoogleLoginRequest.cs",
@@ -332,19 +304,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "ReviewsController.cs",
-              "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Controllers\\ReviewsController.cs",
-              "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Controllers\\ReviewsController.cs",
-              "ToolTip": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Controllers\\ReviewsController.cs",
-              "RelativeToolTip": "DoctorAppointmentSystemAPI\\Controllers\\ReviewsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-23T15:49:55.593Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 16,
               "Title": "IEmailService.cs",
               "DocumentMoniker": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI\\Services\\IEmailService.cs",
               "RelativeDocumentMoniker": "DoctorAppointmentSystemAPI\\Services\\IEmailService.cs",

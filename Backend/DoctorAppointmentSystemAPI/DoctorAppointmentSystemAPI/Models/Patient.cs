@@ -9,6 +9,6 @@ namespace DoctorAppointmentSystemAPI.Models
         public string FullName { get; set; }
         public string Email { get; set; }
         public List<Appointment> Appointments { get; set; }
-        public List<Review> Reviews { get; set; }
+        
     }
 }

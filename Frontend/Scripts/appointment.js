@@ -1,3 +1,5 @@
+import apiClient from '../js/api.js';
+
 // Functions
 function logout() {
     localStorage.removeItem('token');
@@ -106,17 +108,9 @@ function hideDropdown(dropdownContainer) {
 
 async function fetchSpecialties() {
     try {
-        const response = await fetch('https://localhost:7285/api/patients/specialties', {
-            headers: {
-                'Accept': 'application/json'
-            }
-        });
-        if (response.ok) {
-            specialties = await response.json();
-            setupSpecialtySearch();
-        } else {
-            console.error('Failed to fetch specialties:', response.status);
-        }
+        const response = await apiClient.getSpecialties();
+        specialties = response; // Set the global specialties array
+        setupSpecialtySearch();
     } catch (error) {
         console.error('Error fetching specialties:', error);
     }
@@ -126,10 +120,13 @@ function setupSpecialtySearch() {
     const searchInput = document.getElementById('searchInput');
     const searchBox = searchInput.parentElement;
     
-    // Create dropdown container
-    const dropdownContainer = document.createElement('div');
-    dropdownContainer.className = 'specialty-dropdown';
-    searchBox.appendChild(dropdownContainer);
+    // Create dropdown container if it doesn't exist
+    let dropdownContainer = searchBox.querySelector('.specialty-dropdown');
+    if (!dropdownContainer) {
+        dropdownContainer = document.createElement('div');
+        dropdownContainer.className = 'specialty-dropdown';
+        searchBox.appendChild(dropdownContainer);
+    }
 
     // Handle input changes - only update dropdown, don't search
     searchInput.addEventListener('input', function(e) {
@@ -137,7 +134,6 @@ function setupSpecialtySearch() {
         const filteredSpecialties = specialties.filter(specialty => 
             specialty.toLowerCase().includes(searchTerm)
         );
-        
         updateSpecialtyDropdown(filteredSpecialties, dropdownContainer);
     });
 
@@ -211,50 +207,24 @@ function hideSpecialtyDropdown(dropdownContainer) {
 
 async function fetchDoctors(filters = {}, isSearch = false) {
     try {
-        let url;
-        const queryParams = new URLSearchParams();
-
+        let doctors;
         if (isSearch) {
             // Use search API when user clicks search
-            // Only add parameters if they have values to avoid empty parameters
+            const searchParams = {};
             if (filters.searchQuery && filters.searchQuery.trim() !== '') {
-                queryParams.append('specialty', filters.searchQuery.trim());
+                searchParams.specialty = filters.searchQuery.trim();
             }
             if (filters.city && filters.city.trim() !== '') {
-                queryParams.append('location', filters.city.trim());
+                searchParams.location = filters.city.trim();
             }
-            url = `https://localhost:7285/api/patients/search-doctors`;
-            // Only append query string if we have parameters
-            if (queryParams.toString()) {
-                url += `?${queryParams.toString()}`;
-            }
+            doctors = await apiClient.searchDoctors(searchParams);
         } else {
-            // Use original API for initial load and other cases
-            if (filters.searchQuery) queryParams.append('search', filters.searchQuery);
-            if (filters.city) queryParams.append('city', filters.city);
-            if (filters.availability) queryParams.append('available', 'true');
-            if (filters.online) queryParams.append('online', 'true');
-            url = `https://localhost:7285/api/doctors/approved?${queryParams.toString()}`;
+            // Use getApprovedDoctors API for initial load and other cases
+            doctors = await apiClient.getApprovedDoctors();
         }
-
-        console.log('Fetching doctors with URL:', url); // Debug log
-
-        const response = await fetch(url, {
-            headers: {
-                'Accept': 'application/json'
-            }
-        });
-
-        if (response.ok) {
-            const doctors = await response.json();
-            displayDoctors(doctors);
-            updateActiveFilters();
-        } else {
-            console.error('Failed to fetch doctors:', response.status);
-            const errorText = await response.text();
-            console.error('Error details:', errorText); // Debug log
-            displayDoctors([]); // Show no doctors message
-        }
+        
+        displayDoctors(doctors);
+        updateActiveFilters();
     } catch (error) {
         console.error('Error fetching doctors:', error);
         displayDoctors([]); // Show no doctors message
@@ -289,8 +259,10 @@ function displayDoctors(doctors) {
                     <h3>${doctor.fullName}</h3>
                     <p class="specialty">${doctor.specialty}</p>
                     <div class="rating">
-                        ${'<i class="fas fa-star"></i>'.repeat(doctor.rating || 5)}
-                        <span>${doctor.reviewCount || 0} görüş</span>
+                        <div class="rating-stars">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                        <span class="review-count" style="cursor: pointer">Yükleniyor...</span>
                     </div>
                     <p class="location">
                         <i class="fas fa-map-marker-alt"></i>
@@ -299,6 +271,10 @@ function displayDoctors(doctors) {
                 </div>
             </div>
             <div class="availability">
+                <button class="add-review-btn" onclick="showAddReviewModal(${doctor.id}, '${doctor.fullName}')">
+                    <i class="fas fa-star"></i> Yorum Yap
+                </button>
+                <div class="reviews-section"></div>
                 <div class="date-selector"></div>
                 <div class="time-slots"></div>
             </div>
@@ -307,18 +283,19 @@ function displayDoctors(doctors) {
         // Add click handler for the doctor info section only
         const doctorInfo = doctorCard.querySelector('.doctor-info');
         doctorInfo.addEventListener('click', function(e) {
-            // Find all expanded cards except this one
-            const otherExpandedCards = document.querySelectorAll('.doctor-card.expanded:not([data-doctor-id="' + doctor.id + '"])');
-            otherExpandedCards.forEach(card => card.classList.remove('expanded'));
-            
-            // Toggle this card
-            doctorCard.classList.toggle('expanded');
-            
-            // Load availability if not already loaded
-            if (doctorCard.classList.contains('expanded') && !doctorCard.dataset.loaded) {
-                console.log('Loading availability for doctor:', doctor.id);
-                loadAvailability(doctorCard);
-                doctorCard.dataset.loaded = 'true';
+            if (!e.target.classList.contains('review-count')) {
+                // Find all expanded cards except this one
+                const otherExpandedCards = document.querySelectorAll('.doctor-card.expanded:not([data-doctor-id="' + doctor.id + '"])');
+                otherExpandedCards.forEach(card => card.classList.remove('expanded'));
+                
+                // Toggle this card
+                doctorCard.classList.toggle('expanded');
+                
+                // Load availability and reviews if not already loaded
+                if (doctorCard.classList.contains('expanded') && !doctorCard.dataset.loaded) {
+                    loadDoctorData(doctorCard);
+                    doctorCard.dataset.loaded = 'true';
+                }
             }
         });
 
@@ -335,9 +312,7 @@ function displayDoctors(doctors) {
             id: doctor.id,
             name: doctor.fullName,
             specialty: doctor.specialty,
-            address: doctor.address || `${doctor.city}, ${doctor.town}`,
-            rating: doctor.rating || 5,
-            reviewCount: doctor.reviewCount || 0
+            address: doctor.address || `${doctor.city}, ${doctor.town}`
         };
     });
 
@@ -422,7 +397,8 @@ function removeFilter(type) {
     fetchDoctors(activeFilters, false);
 }
 
-function searchDoctors() {
+// Remove the standalone searchDoctors function and update the event listener
+function handleSearch() {
     const searchInput = document.getElementById('searchInput');
     const locationInput = document.getElementById('locationInput');
     
@@ -437,7 +413,7 @@ function selectSpecialty(specialty) {
     const searchInput = document.getElementById('searchInput');
     if (searchInput) {
         searchInput.value = specialty;
-        searchDoctors();
+        handleSearch();
     }
 }
 
@@ -493,20 +469,10 @@ async function loadAvailability(card) {
     
     try {
         // Fetch doctor's availability schedule
-        const availabilityResponse = await fetch(`https://localhost:7285/api/doctors/${doctorId}/availability`);
-        if (!availabilityResponse.ok) {
-            throw new Error('Failed to fetch doctor availability');
-        }
-        const availability = await availabilityResponse.json();
+        const availability = await apiClient.getDoctorAvailability(doctorId);
 
         // Fetch doctor's appointments
-        const appointmentsResponse = await fetch(`https://localhost:7285/api/patients/get-appointment/${doctorId}`);
-        let appointments = [];
-        if (appointmentsResponse.ok) {
-            appointments = await appointmentsResponse.json();
-        } else if (appointmentsResponse.status !== 404) { // 404 means no appointments, which is fine
-            console.warn('Failed to fetch appointments:', await appointmentsResponse.text());
-        }
+        const appointments = await apiClient.getAppointment(doctorId);
 
         // Get next 7 days and filter only available days based on doctor's schedule
         const next7Days = getNext7Days();
@@ -620,50 +586,150 @@ function getNext7Days() {
     return days;
 }
 
-// Update the selectTimeSlot function
-async function selectTimeSlot(dateTime, doctorId) {
+// Make selectTimeSlot globally accessible
+window.selectTimeSlot = async function(dateTime, doctorId) {
     const token = localStorage.getItem('token');
     if (!token) {
-        if (confirm('You need to sign in to book an appointment. Would you like to sign in now?')) {
-            localStorage.setItem('pendingAppointment', JSON.stringify({
-                dateTime: dateTime,
-                doctorId: doctorId
-            }));
-            window.location.href = 'index.html';
-        }
+        Swal.fire({
+            title: 'Giriş Gerekli',
+            text: 'Randevu oluşturmak için lütfen giriş yapın',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Giriş Yap',
+            cancelButtonText: 'İptal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.setItem('pendingAppointment', JSON.stringify({
+                    dateTime: dateTime,
+                    doctorId: doctorId
+                }));
+                window.location.href = 'user_register.html';
+            }
+        });
         return;
     }
-    
-    try {
-        const response = await fetch(`https://localhost:7285/api/patients/make-appointment/${doctorId}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({
-                appointmentDate: dateTime
-            })
-        });
 
-        if (response.ok) {
-            alert('Appointment booked successfully!');
+    // Add create appointment button to the map section
+    const mapSection = document.querySelector('.map-section');
+    mapSection.innerHTML = `
+        <div class="appointment-summary" style="padding: 20px; background: white;">
+            <h3>Randevu Özeti</h3>
+            <p><strong>Tarih:</strong> ${new Date(dateTime).toLocaleDateString('tr-TR')}</p>
+            <p><strong>Saat:</strong> ${new Date(dateTime).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })}</p>
+            <button id="createAppointmentBtn" class="nav-btn" style="width: 100%; justify-content: center; background-color: var(--primary-color); color: white; margin-top: 20px;">
+                <i class="fas fa-calendar-check"></i>
+                Randevu Oluştur
+            </button>
+        </div>
+        <div id="map"></div>
+    `;
+
+    // Add click handler for the create appointment button
+    document.getElementById('createAppointmentBtn').addEventListener('click', () => {
+        createAppointment(doctorId, dateTime);
+    });
+
+    // Re-initialize the map since we modified its container
+    initMap();
+};
+
+// Function to create the appointment
+async function createAppointment(doctorId, dateTime) {
+    try {
+        // Get the authentication token
+        const token = localStorage.getItem('token');
+        if (!token) {
+            throw new Error('Authentication token not found. Please sign in again.');
+        }
+
+        // Get user data from localStorage
+        const userJson = localStorage.getItem('user');
+        if (!userJson) {
+            throw new Error('User information not found. Please sign in again.');
+        }
+
+        const user = JSON.parse(userJson);
+        if (!user.uid) {
+            throw new Error('User ID not found. Please sign in again.');
+        }
+
+        // Set the token in the API client
+        apiClient.setAuthToken(token);
+
+        // Parse the selected date and time
+        const [datePart, timePart] = dateTime.split(' ');
+        
+        // Create a Date object in local timezone
+        const localDate = new Date(`${datePart}T${timePart}`);
+        
+        // Convert to UTC ISO string
+        const formattedDate = localDate.toISOString();
+        
+        const appointmentData = {
+            id: 0,
+            doctorId: parseInt(doctorId),
+            patientId: user.uid, // Add patientId from user data
+            appointmentDate: formattedDate
+        };
+
+        console.log('Sending appointment data:', JSON.stringify(appointmentData, null, 2));
+
+        const response = await apiClient.makeAppointment(appointmentData);
+        console.log('Appointment response:', response);
+
+        Swal.fire({
+            title: 'Başarılı!',
+            text: 'Randevunuz başarıyla oluşturuldu',
+            icon: 'success',
+            confirmButtonText: 'Tamam'
+        }).then(() => {
             // Reload availability to update the UI
             const doctorCard = document.querySelector(`[data-doctor-id="${doctorId}"]`);
             if (doctorCard) {
                 loadAvailability(doctorCard);
             }
-        } else {
-            const error = await response.text();
-            alert(`Failed to book appointment: ${error}`);
-        }
+            // Reset the map section
+            const mapSection = document.querySelector('.map-section');
+            mapSection.innerHTML = '<div id="map"></div>';
+            initMap();
+        });
     } catch (error) {
-        console.error('Error booking appointment:', error);
-        alert('Failed to book appointment. Please try again.');
+        console.error('Error creating appointment:', error);
+        
+        let errorMessage = 'Randevu oluşturulamadı. ';
+        if (error.message.includes('token') || error.message.includes('User')) {
+            errorMessage = error.message;
+            // Redirect to login for any authentication related errors
+            window.location.href = 'user_register.html';
+        } else if (error.message.includes('status: 400')) {
+            // Extract the error message from the response
+            const match = error.message.match(/message: (.*)/);
+            if (match) {
+                try {
+                    const errorObj = JSON.parse(match[1]);
+                    if (errorObj.errors) {
+                        errorMessage = Object.values(errorObj.errors)
+                            .flat()
+                            .join('\n');
+                    }
+                } catch (e) {
+                    errorMessage = match[1];
+                }
+            }
+        } else {
+            errorMessage += 'Lütfen tekrar deneyin.';
+        }
+
+        Swal.fire({
+            title: 'Hata!',
+            text: errorMessage,
+            icon: 'error',
+            confirmButtonText: 'Tamam'
+        });
     }
 }
 
-// Initialize everything when the DOM is ready
+// Update the event listener to use handleSearch
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize map
     initMap();
@@ -687,51 +753,411 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set up search button click listener
     const searchButton = document.getElementById('searchButton');
     if (searchButton) {
-        searchButton.addEventListener('click', searchDoctors);
+        searchButton.addEventListener('click', handleSearch);
     }
-
-    // Set up filter tab listeners
-    document.querySelectorAll('.filter-tab').forEach(tab => {
-        tab.addEventListener('click', function() {
-            const filterType = this.dataset.filter;
-            
-            if (filterType === 'all') {
-                // Reset all filters
-                activeFilters.availability = false;
-                activeFilters.online = false;
-                activeFilters.searchQuery = '';
-                activeFilters.city = '';
-                document.getElementById('searchInput').value = '';
-                document.getElementById('locationInput').value = '';
-                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-                // Show all doctors using default endpoint
-                fetchDoctors({}, false);
-            } else {
-                document.querySelector('[data-filter="all"]').classList.remove('active');
-                this.classList.toggle('active');
-                
-                if (filterType === 'available') {
-                    activeFilters.availability = this.classList.contains('active');
-                } else if (filterType === 'online') {
-                    activeFilters.online = this.classList.contains('active');
-                }
-                // Apply filters using default endpoint
-                fetchDoctors(activeFilters, false);
-            }
-        });
-    });
 
     // Set up search input listeners for Enter key
     const searchInput = document.getElementById('searchInput');
     if (searchInput) {
         searchInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
-                searchDoctors();
+                handleSearch();
             }
         });
     }
-    
+
     // Initial load - show all doctors using default endpoint
     fetchDoctors({}, false);
-}); 
+});
+
+// Export functions
+export async function getDoctorAvailability(doctorId) {
+    try {
+        return await apiClient.getDoctorAvailability(doctorId);
+    } catch (error) {
+        console.error('Error fetching doctor availability:', error);
+        throw error;
+    }
+}
+
+export async function makeAppointment(appointmentData) {
+    try {
+        return await apiClient.makeAppointment(appointmentData);
+    } catch (error) {
+        console.error('Error making appointment:', error);
+        throw error;
+    }
+}
+
+export async function getAppointment(doctorId) {
+    try {
+        return await apiClient.getAppointment(doctorId);
+    } catch (error) {
+        console.error('Error fetching appointment:', error);
+        throw error;
+    }
+}
+
+export async function searchDoctors(searchParams) {
+    try {
+        return await apiClient.searchDoctors(searchParams);
+    } catch (error) {
+        console.error('Error searching doctors:', error);
+        throw error;
+    }
+}
+
+export async function getSpecialties() {
+    try {
+        return await apiClient.getSpecialties();
+    } catch (error) {
+        console.error('Error fetching specialties:', error);
+        throw error;
+    }
+}
+
+// Add these new functions for reviews
+async function showReviewsModal(doctorId, doctorName) {
+    try {
+        const reviews = await apiClient.getReviews(doctorId);
+        
+        const modalHtml = `
+            <div class="reviews-modal">
+                <h2>Reviews for Dr. ${doctorName}</h2>
+                <div class="reviews-list">
+                    ${reviews.reviews.map(review => `
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="review-rating">
+                                    ${'★'.repeat(review.rating)}${'☆'.repeat(5-review.rating)}
+                                </div>
+                                <div class="review-date">
+                                    ${new Date(review.timestamp).toLocaleDateString()}
+                                </div>
+                            </div>
+                            <div class="review-comment">${review.comment}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+
+        Swal.fire({
+            html: modalHtml,
+            width: '600px',
+            showCloseButton: true,
+            showConfirmButton: false,
+            customClass: {
+                container: 'reviews-modal-container'
+            }
+        });
+    } catch (error) {
+        console.error('Error fetching reviews:', error);
+        Swal.fire('Error', 'Could not load reviews', 'error');
+    }
+}
+
+async function showAddReviewModal(doctorId, doctorName) {
+    const { value: formValues } = await Swal.fire({
+        title: `Review Dr. ${doctorName}`,
+        html: `
+            <div class="rating-input">
+                <div class="stars">
+                    ${[1,2,3,4,5].map(num => `
+                        <i class="far fa-star" data-rating="${num}"></i>
+                    `).join('')}
+                </div>
+            </div>
+            <textarea id="review-comment" class="swal2-textarea" placeholder="Write your review here..."></textarea>
+        `,
+        focusConfirm: false,
+        showCancelButton: true,
+        confirmButtonText: 'Submit Review',
+        didOpen: () => {
+            const stars = document.querySelectorAll('.stars i');
+            let selectedRating = 0;
+
+            stars.forEach(star => {
+                star.addEventListener('click', () => {
+                    selectedRating = parseInt(star.dataset.rating);
+                    stars.forEach(s => {
+                        const rating = parseInt(s.dataset.rating);
+                        if (rating <= selectedRating) {
+                            s.classList.remove('far');
+                            s.classList.add('fas', 'selected');
+                        } else {
+                            s.classList.remove('fas', 'selected');
+                            s.classList.add('far');
+                        }
+                    });
+                });
+                
+                star.addEventListener('mouseover', () => {
+                    const rating = parseInt(star.dataset.rating);
+                    stars.forEach(s => {
+                        const currentRating = parseInt(s.dataset.rating);
+                        if (currentRating <= rating) {
+                            s.classList.remove('far');
+                            s.classList.add('fas');
+                        }
+                    });
+                });
+                
+                star.addEventListener('mouseout', () => {
+                    stars.forEach(s => {
+                        const rating = parseInt(s.dataset.rating);
+                        if (rating <= selectedRating) {
+                            s.classList.remove('far');
+                            s.classList.add('fas', 'selected');
+                        } else {
+                            s.classList.remove('fas', 'selected');
+                            s.classList.add('far');
+                        }
+                    });
+                });
+            });
+        },
+        preConfirm: () => {
+            const rating = document.querySelectorAll('.stars .selected').length;
+            const comment = document.getElementById('review-comment').value;
+            
+            if (!rating) {
+                Swal.showValidationMessage('Please select a rating');
+                return false;
+            }
+            if (!comment.trim()) {
+                Swal.showValidationMessage('Please write a review');
+                return false;
+            }
+            
+            return { rating, comment };
+        }
+    });
+
+    if (formValues) {
+        try {
+            const reviewData = {
+                doctorId: doctorId,
+                patientId: JSON.parse(localStorage.getItem('user')).uid,
+                rating: formValues.rating,
+                comment: formValues.comment
+            };
+
+            await apiClient.addReview(reviewData);
+            
+            Swal.fire(
+                'Success!',
+                'Your review has been submitted.',
+                'success'
+            ).then(() => {
+                // Refresh the doctor card to show updated rating
+                fetchDoctors(activeFilters, false);
+            });
+        } catch (error) {
+            console.error('Error submitting review:', error);
+            Swal.fire('Error', 'Could not submit review', 'error');
+        }
+    }
+}
+
+// Make the new functions globally accessible
+window.showReviewsModal = showReviewsModal;
+window.showAddReviewModal = showAddReviewModal;
+
+// Add styles to the document
+const styles = `
+    .reviews-modal {
+        padding: 20px;
+    }
+    
+    .reviews-modal h2 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+    
+    .reviews-list {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+    
+    .review-item {
+        border-bottom: 1px solid #eee;
+        padding: 15px 0;
+    }
+    
+    .review-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+    
+    .review-rating {
+        color: #FFC107;
+    }
+    
+    .review-date {
+        color: #666;
+        font-size: 0.9em;
+    }
+    
+    .review-comment {
+        color: #333;
+        line-height: 1.5;
+    }
+    
+    .rating-input {
+        margin-bottom: 20px;
+    }
+    
+    .stars {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        font-size: 24px;
+        color: #FFC107;
+        cursor: pointer;
+    }
+    
+    .stars i:hover {
+        transform: scale(1.2);
+    }
+    
+    .add-review-btn {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .add-review-btn:hover {
+        background-color: var(--secondary-color);
+        transform: translateY(-1px);
+    }
+`;
+
+const styleSheet = document.createElement('style');
+styleSheet.textContent = styles;
+document.head.appendChild(styleSheet);
+
+// New function to load both availability and reviews
+async function loadDoctorData(card) {
+    const doctorId = parseInt(card.dataset.doctorId);
+    
+    // Load availability
+    loadAvailability(card);
+    
+    try {
+        // Fetch reviews
+        const reviews = await apiClient.getReviews(doctorId);
+        
+        // Update rating display
+        const ratingDiv = card.querySelector('.rating');
+        const averageRating = reviews.averageRating || 0;
+        const reviewCount = reviews.reviews?.length || 0;
+        
+        ratingDiv.innerHTML = `
+            <div class="rating-stars">
+                ${'★'.repeat(averageRating)}${'☆'.repeat(5-averageRating)}
+            </div>
+            <span class="review-count" style="cursor: pointer">${reviewCount} görüş</span>
+        `;
+        
+        // Add click handler for review count
+        const reviewCountSpan = ratingDiv.querySelector('.review-count');
+        reviewCountSpan.addEventListener('click', () => showReviewsModal(doctorId, card.querySelector('h3').textContent));
+        
+        // Display recent reviews in the reviews section
+        const reviewsSection = card.querySelector('.reviews-section');
+        if (reviews.reviews && reviews.reviews.length > 0) {
+            const recentReviews = reviews.reviews.slice(0, 3); // Show only the 3 most recent reviews
+            reviewsSection.innerHTML = `
+                <h4>Son Yorumlar</h4>
+                ${recentReviews.map(review => `
+                    <div class="review-item">
+                        <div class="review-header">
+                            <div class="review-rating">
+                                ${'★'.repeat(review.rating)}${'☆'.repeat(5-review.rating)}
+                            </div>
+                            <div class="review-date">
+                                ${new Date(review.timestamp).toLocaleDateString()}
+                            </div>
+                        </div>
+                        <div class="review-comment">${review.comment}</div>
+                    </div>
+                `).join('')}
+                ${reviews.reviews.length > 3 ? `
+                    <button class="show-all-reviews" onclick="showReviewsModal(${doctorId}, '${card.querySelector('h3').textContent}')">
+                        Tüm yorumları gör (${reviews.reviews.length})
+                    </button>
+                ` : ''}
+            `;
+        } else {
+            reviewsSection.innerHTML = '<p class="no-reviews">Henüz yorum yapılmamış</p>';
+        }
+    } catch (error) {
+        console.error('Error loading reviews:', error);
+        const ratingDiv = card.querySelector('.rating');
+        ratingDiv.innerHTML = `
+            <div class="rating-stars">
+                <span class="error-message">Rating yüklenemedi</span>
+            </div>
+        `;
+    }
+}
+
+// Add these additional styles
+const additionalStyles = `
+    .reviews-section {
+        margin: 20px 0;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 8px;
+    }
+
+    .reviews-section h4 {
+        margin: 0 0 15px 0;
+        color: #333;
+    }
+
+    .show-all-reviews {
+        width: 100%;
+        padding: 10px;
+        margin-top: 15px;
+        background: none;
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .show-all-reviews:hover {
+        background: var(--primary-color);
+        color: white;
+    }
+
+    .no-reviews {
+        text-align: center;
+        color: #666;
+        font-style: italic;
+        margin: 10px 0;
+    }
+
+    .error-message {
+        color: #dc3545;
+        font-size: 0.9em;
+    }
+`;
+
+// Append the additional styles
+styleSheet.textContent += additionalStyles; 

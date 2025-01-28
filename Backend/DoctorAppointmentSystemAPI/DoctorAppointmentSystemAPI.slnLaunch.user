@@ -1,0 +1,19 @@
+[
+  {
+    "Name": "Yeni Profil",
+    "Projects": [
+      {
+        "Path": "DoctorAppointmentSystemAPI\\DoctorAppointmentSystemAPI.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "..\\..\\..\\..\\..\\Desktop\\CommentsService\\CommentsService\\CommentsService.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "..\\..\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

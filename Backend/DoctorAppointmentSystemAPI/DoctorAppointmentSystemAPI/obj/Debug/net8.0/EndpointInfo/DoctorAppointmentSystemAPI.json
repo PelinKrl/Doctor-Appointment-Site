@@ -355,64 +355,6 @@
         }
       }
     },
-    "/api/patients/reviews/{doctorId}": {
-      "post": {
-        "tags": [
-          "Patients"
-        ],
-        "parameters": [
-          {
-            "name": "doctorId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Review"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Review"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Review"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/Review"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Review"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Review"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/patients/get-appointment/{doctorId}": {
       "get": {
         "tags": [
@@ -470,18 +412,6 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/api/Reviews": {
-      "get": {
-        "tags": [
-          "Reviews"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
           }
         }
       }
@@ -672,32 +602,6 @@
           "email": {
             "type": "string",
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "Review": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "nullable": true
-          },
-          "doctorId": {
-            "type": "string",
-            "nullable": true
-          },
-          "patientId": {
-            "type": "string",
-            "nullable": true
-          },
-          "comment": {
-            "type": "string",
-            "nullable": true
-          },
-          "rating": {
-            "type": "integer",
-            "format": "int32"
           }
         },
         "additionalProperties": false

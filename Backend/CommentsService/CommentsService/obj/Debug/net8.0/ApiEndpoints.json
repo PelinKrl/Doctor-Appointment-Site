@@ -1,0 +1,50 @@
+[
+  {
+    "ContainingType": "CommentsService.Controllers.ReviewController",
+    "Method": "GetReviews",
+    "RelativePath": "api/reviews/{doctorId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "doctorId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CommentsService.Controllers.ReviewController",
+    "Method": "AddReview",
+    "RelativePath": "api/reviews/add-review",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "review",
+        "Type": "CommentsService.Models.Review",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CommentsService.Controllers.ReviewController",
+    "Method": "CheckInappropriateComment",
+    "RelativePath": "api/reviews/check-inappropriate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "comment",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

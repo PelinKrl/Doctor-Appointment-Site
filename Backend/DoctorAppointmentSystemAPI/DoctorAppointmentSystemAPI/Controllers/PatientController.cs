@@ -3,6 +3,7 @@ using DoctorAppointmentSystemAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Google.Apis.Auth;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
 [Route("api/patients")]
@@ -52,7 +53,7 @@ public class PatientsController : ControllerBase
 
 
 
-
+    [Authorize]
     [HttpGet("search-doctors")]
     public async Task<ActionResult<IEnumerable<Doctor>>> SearchDoctors([FromQuery] string specialty = null, [FromQuery] string location = null)
     {
@@ -73,38 +74,37 @@ public class PatientsController : ControllerBase
     public async Task<ActionResult<Appointment>> MakeAppointment([FromBody] Appointment appointment)
     {
         // Get patient ID from the authenticated user's session
-        var patientId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value; // Requires authentication middleware
+        var patientId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
         if (patientId == null)
         {
             return Unauthorized("User not logged in.");
         }
 
-        // Validate appointment details
+        // Ensure the DoctorId is provided
         if (appointment.DoctorId == 0)
         {
             return BadRequest("Doctor ID is required.");
         }
 
-        // Assign patient ID from session
+        // Assign PatientId to the appointment
         appointment.PatientId = patientId;
 
-        var result = await _patientService.MakeAppointmentAsync(appointment);
-        return CreatedAtAction(nameof(MakeAppointment), new { id = result.Id }, result);
-    }
-
-    [HttpPost("reviews/{doctorId}")]
-    public async Task<ActionResult<Review>> AddReview(string doctorId, [FromBody] Review review)
-    {
         try
         {
-            var result = await _patientService.AddReviewAsync(doctorId, review);
-            return Ok(result);
+            // Call the service to book the appointment
+            var result = await _patientService.MakeAppointmentAsync(appointment);
+
+            // Return the newly created appointment with a 201 status code
+            return CreatedAtAction(nameof(MakeAppointment), new { id = result.Id }, result);
         }
-        catch (ArgumentException ex)
+        catch (Exception ex)
         {
-            return BadRequest(ex.Message);
+            // Handle any service-level errors
+            return StatusCode(500, new { Error = $"An error occurred: {ex.Message}" });
         }
     }
+
 
     [HttpGet("get-appointment/{doctorId}")]
     public async Task<IActionResult> GetUpcomingAppointments(int doctorId)

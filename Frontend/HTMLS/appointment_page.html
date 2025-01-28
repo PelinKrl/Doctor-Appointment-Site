@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         :root {
             --primary-color: #2196F3;
@@ -42,9 +43,9 @@
             gap: 16px;
             margin-bottom: 24px;
             background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px var(--shadow-color);
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .search-input-wrapper {
@@ -52,37 +53,67 @@
             flex: 1;
         }
 
+        .search-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #757575;
+            font-size: 16px;
+            z-index: 1;
+        }
+
         .search-input {
             width: 100%;
-            padding: 12px 16px 12px 40px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
             font-size: 16px;
             transition: all 0.3s ease;
+            background-color: #f8f9fa;
+        }
+
+        .search-input::placeholder {
+            color: #757575;
+            opacity: 0.8;
         }
 
         .search-input:focus {
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+            background-color: white;
+            box-shadow: 0 0 0 4px rgba(33, 150, 243, 0.1);
             outline: none;
         }
 
         .search-btn {
-            padding: 12px 24px;
+            padding: 16px 32px;
             background-color: var(--primary-color);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 600;
             transition: all 0.3s ease;
-            min-width: 120px;
+            min-width: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .search-btn i {
+            font-size: 18px;
         }
 
         .search-btn:hover {
-            background-color: var(--secondary-color);
-            transform: translateY(-1px);
+            background-color: #1976D2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+        }
+
+        .search-btn:active {
+            transform: translateY(0);
         }
 
         .filter-tabs {
@@ -342,10 +373,16 @@
         @media (max-width: 768px) {
             .search-box {
                 flex-direction: column;
+                padding: 16px;
+            }
+
+            .search-input {
+                padding: 14px 14px 14px 44px;
             }
 
             .search-btn {
                 width: 100%;
+                padding: 14px;
             }
 
             .doctor-info {
@@ -463,6 +500,94 @@
                 transform: translateY(0);
             }
         }
+
+        /* Dropdown Styles */
+        .specialty-dropdown,
+        .city-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 8px;
+        }
+
+        .specialty-dropdown.visible,
+        .city-dropdown.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .specialty-item,
+        .city-item {
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            color: #333;
+        }
+
+        .specialty-item i,
+        .city-item i {
+            color: #757575;
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .specialty-item:hover,
+        .city-item:hover {
+            background-color: #f0f7ff;
+            color: var(--primary-color);
+        }
+
+        .specialty-item:hover i,
+        .city-item:hover i {
+            color: var(--primary-color);
+        }
+
+        .no-results {
+            padding: 16px;
+            text-align: center;
+            color: #666;
+            font-style: italic;
+        }
+
+        /* Scrollbar Styles */
+        .specialty-dropdown::-webkit-scrollbar,
+        .city-dropdown::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .specialty-dropdown::-webkit-scrollbar-track,
+        .city-dropdown::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .specialty-dropdown::-webkit-scrollbar-thumb,
+        .city-dropdown::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 4px;
+        }
+
+        .specialty-dropdown::-webkit-scrollbar-thumb:hover,
+        .city-dropdown::-webkit-scrollbar-thumb:hover {
+            background: #bbb;
+        }
     </style>
 </head>
 <body>
@@ -487,14 +612,15 @@
         <main class="search-section">
             <div class="search-box">
                 <div class="search-input-wrapper">
-                    <i class="fas fa-search"></i>
                     <input type="text" id="searchInput" placeholder="Doktor veya uzmanlık ara" class="search-input">
                 </div>
                 <div class="search-input-wrapper">
-                    <i class="fas fa-map-marker-alt"></i>
                     <input type="text" id="locationInput" placeholder="İl seçin" class="search-input">
                 </div>
-                <button type="button" id="searchButton" class="search-btn">Ara</button>
+                <button type="button" id="searchButton" class="search-btn">
+                    <i class="fas fa-search"></i>
+                    Ara
+                </button>
             </div>
 
             <div class="filter-tabs">
@@ -516,6 +642,39 @@
         </aside>
     </div>
 
-    <script src="../Scripts/appointment.js"></script>
+    <script src="../Scripts/firebase-config.js"></script>
+    <script type="module" src="../Scripts/appointment.js"></script>
+    <script>
+        function handleAuthClick() {
+            const isAuthenticated = localStorage.getItem('token');
+            if (isAuthenticated) {
+                // Logout
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                localStorage.removeItem('userType');
+                window.location.href = 'index.html';
+            } else {
+                // Redirect to login page
+                window.location.href = 'user_register.html';
+            }
+        }
+
+        // Update auth button text based on authentication state
+        document.addEventListener('DOMContentLoaded', function() {
+            const authButton = document.getElementById('auth-button');
+            const authText = document.getElementById('auth-text');
+            const isAuthenticated = localStorage.getItem('token');
+
+            if (isAuthenticated) {
+                authButton.classList.remove('login-btn');
+                authButton.classList.add('logout-btn');
+                authText.textContent = 'Sign Out';
+            } else {
+                authButton.classList.remove('logout-btn');
+                authButton.classList.add('login-btn');
+                authText.textContent = 'Sign In';
+            }
+        });
+    </script>
 </body>
 </html> 

@@ -1,38 +1,71 @@
-import { authenticateWithGoogle, registerDoctor, getCities, getTowns } from './api.js';
+import apiClient from './api.js';
 
 // Store the authentication token
 let authToken = null;
-let googleAuth = null;
 
-// Initialize Google Auth
-function initGoogleAuth() {
-    gapi.load('auth2', function() {
-        gapi.auth2.init({
-            client_id: 'YOUR_GOOGLE_CLIENT_ID',
-            scope: 'profile email'
-        }).then(function(auth) {
-            googleAuth = auth;
-        }).catch(function(error) {
-            showError('Failed to initialize Google authentication');
-            console.error('Auth init error:', error);
-        });
-    });
+// Initialize Firebase when the script loads
+if (typeof window.firebaseConfig !== 'undefined') {
+    if (!firebase.apps.length) {
+        firebase.initializeApp(window.firebaseConfig);
+    }
 }
 
 // Initialize the form
 document.addEventListener('DOMContentLoaded', async () => {
-    initGoogleAuth();
+    // Add click handler for Google Sign In button
+    document.getElementById('google-sign-in').addEventListener('click', async () => {
+        try {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            const result = await firebase.auth().signInWithPopup(provider);
+            const user = result.user;
+            
+            // Store the token for later use
+            const token = await user.getIdToken();
+            localStorage.setItem('doctorToken', token);
+            
+            // Set the token in the API client
+            apiClient.setAuthToken(token);
+            
+            // Show the doctor details form
+            document.getElementById('doctor-details').style.display = 'block';
+            
+            // Pre-fill name if available
+            if (user.displayName) {
+                document.getElementById('fullname').value = user.displayName;
+            }
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Successfully signed in!',
+                text: 'Please complete your registration details.',
+                timer: 2000,
+                showConfirmButton: false
+            });
+        } catch (error) {
+            console.error('Error during Google sign in:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Authentication Failed',
+                text: error.message || 'Please try again.'
+            });
+        }
+    });
 
     // Initialize city dropdown
     const citySelect = document.getElementById('city');
     const townSelect = document.getElementById('town');
     
     try {
-        const { cities } = await getCities();
-        cities.forEach(city => {
+        const response = await fetch('https://turkiyeapi.dev/api/v1/provinces');
+        const data = await response.json();
+        const cities = data.data;
+        
+        // Sort cities alphabetically
+        cities.sort((a, b) => a.name.localeCompare(b.name, 'tr')).forEach(city => {
             const option = document.createElement('option');
-            option.value = city;
-            option.textContent = city;
+            option.value = city.id; // Store city ID as value
+            option.textContent = city.name;
+            option.dataset.name = city.name; // Store city name in dataset
             citySelect.appendChild(option);
         });
     } catch (error) {
@@ -42,15 +75,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Handle city selection
     citySelect.addEventListener('change', async (e) => {
-        const selectedCity = e.target.value;
-        if (selectedCity) {
+        const selectedOption = e.target.selectedOptions[0];
+        const provinceId = selectedOption.value;
+        
+        if (provinceId) {
             try {
-                const { towns } = await getTowns(selectedCity);
-                townSelect.innerHTML = '<option value="">Select Town</option>';
-                towns.forEach(town => {
+                const response = await fetch(`https://turkiyeapi.dev/api/v1/districts?provinceId=${provinceId}`);
+                const data = await response.json();
+                const districts = data.data;
+                
+                townSelect.innerHTML = '<option value="">İlçe Seçin</option>';
+                districts.sort((a, b) => a.name.localeCompare(b.name, 'tr')).forEach(district => {
                     const option = document.createElement('option');
-                    option.value = town;
-                    option.textContent = town;
+                    option.value = district.name; // Use district name as value
+                    option.textContent = district.name;
                     townSelect.appendChild(option);
                 });
                 townSelect.disabled = false;
@@ -59,7 +97,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 showError('Failed to load towns. Please try again.');
             }
         } else {
-            townSelect.innerHTML = '<option value="">Select Town</option>';
+            townSelect.innerHTML = '<option value="">İlçe Seçin</option>';
             townSelect.disabled = true;
         }
     });
@@ -69,132 +107,162 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('endTime').value = '17:00';
 });
 
-// Handle Google Authentication
-window.handleGoogleAuth = async () => {
-    const emailInput = document.getElementById('email');
-    const email = emailInput.value.trim();
-
-    if (!email) {
-        showError('Please enter your email address');
-        return;
-    }
-
-    if (!googleAuth) {
-        showError('Google authentication is not initialized. Please refresh the page.');
-        return;
-    }
-
-    try {
-        const googleUser = await googleAuth.signIn();
-        const googleEmail = googleUser.getBasicProfile().getEmail();
-
-        if (googleEmail.toLowerCase() !== email.toLowerCase()) {
-            showError('The email entered does not match your Google account email');
-            return;
-        }
-
-        const id_token = googleUser.getAuthResponse().id_token;
-        const authResponse = await authenticateWithGoogle(id_token);
-        authToken = authResponse.token;
-        
-        // Show the doctor details form
-        document.getElementById('doctor-details').style.display = 'block';
-        
-        // Pre-fill name if available
-        const googleName = googleUser.getBasicProfile().getName();
-        if (googleName) {
-            document.getElementById('fullName').value = googleName;
-        }
-
-        // Disable email input and auth button
-        emailInput.disabled = true;
-        document.querySelector('.google-auth').disabled = true;
-        
-        showSuccess('Successfully authenticated with Google');
-    } catch (error) {
-        console.error('Google sign-in error:', error);
-        showError('Failed to authenticate with Google. Please try again.');
-    }
-};
-
 // Helper function to show errors
 function showError(message) {
-    const errorDiv = document.getElementById('error-message');
-    errorDiv.textContent = message;
-    errorDiv.style.display = 'block';
-    
-    // Hide error after 5 seconds
-    setTimeout(() => {
-        errorDiv.style.display = 'none';
-    }, 5000);
-}
-
-// Helper function to show success messages
-function showSuccess(message) {
-    const successDiv = document.createElement('div');
-    successDiv.className = 'success';
-    successDiv.textContent = message;
-    
-    const formGroup = document.querySelector('.form-group');
-    formGroup.appendChild(successDiv);
-    
-    setTimeout(() => {
-        successDiv.remove();
-    }, 3000);
+    Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: message
+    });
 }
 
 // Handle form submission
-document.getElementById('registration-form').addEventListener('submit', async (e) => {
+document.getElementById('doctorRegistrationForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    if (!authToken) {
-        showError('Please authenticate with Google first');
-        return;
-    }
+    const citySelect = document.getElementById('city');
+    const selectedCityOption = citySelect.options[citySelect.selectedIndex];
+    const townSelect = document.getElementById('town');
+    const streetAddress = document.getElementById('address').value;
+    
+    // Get the city name from the dataset
+    const cityName = selectedCityOption.dataset.name;
+    const townName = townSelect.value;
+    
+    // Combine address components
+    const fullAddress = `${streetAddress}, ${townName}, ${cityName}`;
 
-    // Get selected days from checkboxes
-    const selectedDays = Array.from(document.querySelectorAll('input[name="availableDays"]:checked'))
-        .map(checkbox => checkbox.value);
-
-    if (selectedDays.length === 0) {
-        showError('Please select at least one available day');
-        return;
-    }
-
-    const formData = {
-        email: document.getElementById('email').value,
-        fullName: document.getElementById('fullName').value,
-        specialty: document.getElementById('specialty').value,
-        areaOfInterest: document.getElementById('areaOfInterest').value.split(',').map(item => item.trim()),
-        availableDays: selectedDays,
-        availableHours: {
-            start: document.getElementById('startTime').value,
-            end: document.getElementById('endTime').value
-        },
-        address: {
-            city: document.getElementById('city').value,
-            town: document.getElementById('town').value,
-            fullAddress: document.getElementById('fullAddress').value
-        }
+    // Convert day strings to DayOfWeek enum values (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+    const dayToNumber = {
+        'Sunday': 0,
+        'Monday': 1,
+        'Tuesday': 2,
+        'Wednesday': 3,
+        'Thursday': 4,
+        'Friday': 5,
+        'Saturday': 6
     };
 
-    try {
-        const response = await registerDoctor(formData, authToken);
-        if (response.doctorId) {
-            // Show success message
-            const successDiv = document.createElement('div');
-            successDiv.className = 'success';
-            successDiv.innerHTML = '<i class="fas fa-check-circle"></i> Registration successful! Your application is pending approval.';
-            document.getElementById('registration-form').style.display = 'none';
-            document.querySelector('.container').appendChild(successDiv);
-            
-            // Redirect to dashboard after 3 seconds
-            setTimeout(() => {
-                window.location.href = '/doctor-dashboard.html';
-            }, 3000);
-        }
-    } catch (error) {
-        console.error('Registration error:', error);
-        showError('Failed to register. Please check your information and try again.');
+    const doctorData = {
+        fullName: document.getElementById('fullname').value,
+        specialty: document.getElementById('areaOfInterest').value.toLowerCase(),
+        address: fullAddress,
+        googleToken: localStorage.getItem('doctorToken'),
+        availability: Array.from(document.querySelectorAll('input[name="days"]:checked'))
+            .map(cb => ({
+                day: parseInt(dayToNumber[cb.value]),
+                startTime: document.getElementById('startTime').value + ':00',
+                endTime: document.getElementById('endTime').value + ':00'
+            }))
+    };
+
+    // Update validation to match required DTO fields
+    if (!doctorData.fullName || !doctorData.specialty || !doctorData.address || !doctorData.googleToken) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Validation Error',
+            text: 'Please fill in all required fields and ensure you are properly signed in with Google'
+        });
+        return;
     }
-}); 
+
+    if (doctorData.availability.length === 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Validation Error',
+            text: 'Please select at least one available day'
+        });
+        return;
+    }
+
+    // Log the data being sent
+    console.log('Sending doctor registration data:', JSON.stringify(doctorData, null, 2));
+
+    try {
+        // Ensure token is set before making the request
+        const token = localStorage.getItem('doctorToken');
+        if (!token) {
+            throw new Error('Authentication token not found. Please sign in again.');
+        }
+        apiClient.setAuthToken(token);
+
+        const response = await apiClient.registerDoctor(doctorData);
+        console.log('Registration response:', response);
+        
+        Swal.fire({
+            icon: 'success',
+            title: 'Registration Successful!',
+            text: 'Please wait for admin approval.',
+            timer: 3000,
+            showConfirmButton: false
+        }).then(() => {
+            window.location.href = 'index.html';
+        });
+    } catch (error) {
+        console.error('Registration error details:', error);
+        
+        let errorMessage = 'Registration failed. ';
+        if (error.response) {
+            try {
+                const errorData = await error.response.json();
+                console.log('Error response data:', errorData);
+                errorMessage += errorData.message || errorData.title || 'Please check your information and try again.';
+            } catch (e) {
+                console.log('Error parsing error response:', e);
+                errorMessage += 'Server error occurred. Please try again later.';
+            }
+        } else {
+            errorMessage += error.message || 'Please try again.';
+        }
+
+        Swal.fire({
+            icon: 'error',
+            title: 'Registration Failed',
+            text: errorMessage
+        });
+    }
+});
+
+// Export functions for external use
+export {
+    getApprovedDoctors,
+    getUnapprovedDoctors,
+    approveDoctor,
+    getDoctor
+};
+
+async function getApprovedDoctors() {
+    try {
+        return await apiClient.getApprovedDoctors();
+    } catch (error) {
+        console.error('Error fetching approved doctors:', error);
+        throw error;
+    }
+}
+
+async function getUnapprovedDoctors() {
+    try {
+        return await apiClient.getUnapprovedDoctors();
+    } catch (error) {
+        console.error('Error fetching unapproved doctors:', error);
+        throw error;
+    }
+}
+
+async function approveDoctor(doctorId) {
+    try {
+        return await apiClient.approveDoctor(doctorId);
+    } catch (error) {
+        console.error('Error approving doctor:', error);
+        throw error;
+    }
+}
+
+async function getDoctor(id) {
+    try {
+        return await apiClient.getDoctor(id);
+    } catch (error) {
+        console.error('Error fetching doctor:', error);
+        throw error;
+    }
+} 

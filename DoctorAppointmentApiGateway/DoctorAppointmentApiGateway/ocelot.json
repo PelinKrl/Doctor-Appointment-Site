@@ -1,0 +1,228 @@
+﻿{
+  "Routes": [
+    // Comments Service (localhost:7084)
+    {
+      "DownstreamPathTemplate": "/api/reviews/{doctorId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7084
+        }
+      ],
+      "UpstreamPathTemplate": "/comments/reviews/{doctorId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/reviews/add-review",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7084
+        }
+      ],
+      "UpstreamPathTemplate": "/comments/add-review",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/reviews/check-inappropriate",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7084
+        }
+      ],
+      "UpstreamPathTemplate": "/comments/check-inappropriate",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+
+    // Doctor Appointment System API (localhost:7285)
+    {
+      "DownstreamPathTemplate": "/api/Auth/patient-login",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7285
+        }
+      ],
+      "UpstreamPathTemplate": "/auth/patient-login",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Auth/doctor-login",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7285
+        }
+      ],
+      "UpstreamPathTemplate": "/auth/doctor-login",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Auth/admin-login",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7285
+        }
+      ],
+      "UpstreamPathTemplate": "/auth/admin-login",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/doctors/register",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7285
+        }
+      ],
+      "UpstreamPathTemplate": "/doctors/register",
+      "UpstreamHttpMethod": [ "POST" ]
+      
+    },
+    {
+      "DownstreamPathTemplate": "/api/doctors/{doctorId}/availability",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7285
+        }
+      ],
+      "UpstreamPathTemplate": "/doctors/{doctorId}/availability",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/doctors/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7285
+        }
+      ],
+      "UpstreamPathTemplate": "/doctors/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/doctors/approve/{doctorId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7285
+        }
+      ],
+      "UpstreamPathTemplate": "/doctors/approve/{doctorId}",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Admin",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/doctors/approved",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7285
+        }
+      ],
+      "UpstreamPathTemplate": "/doctors/approved",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/doctors/unapproved",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7285
+        }
+      ],
+      "UpstreamPathTemplate": "/doctors/unapproved",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Admin",
+        "AllowedScopes": []
+      }
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/patients/register",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7285
+        }
+      ],
+      "UpstreamPathTemplate": "/patients/register",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/patients/search-doctors",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7285
+        }
+      ],
+      "UpstreamPathTemplate": "/patients/search-doctors",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/patients/make-appointment",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7285
+        }
+      ],
+      "UpstreamPathTemplate": "/patients/make-appointment",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Firebase",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/patients/get-appointment/{doctorId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7285
+        }
+      ],
+      "UpstreamPathTemplate": "/patients/get-appointment/{doctorId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/patients/specialties",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7285
+        }
+      ],
+      "UpstreamPathTemplate": "/patients/specialties",
+      "UpstreamHttpMethod": [ "GET" ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:9000"
+  }
+}
