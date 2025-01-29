@@ -40,6 +40,18 @@
 
     // Doctor Appointment System API (localhost:7285)
     {
+      "DownstreamPathTemplate": "/api/appointments/queue-unfinished",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7285
+        }
+      ],
+      "UpstreamPathTemplate": "/appointments/queue-unfinished",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/Auth/patient-login",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
@@ -86,7 +98,7 @@
       ],
       "UpstreamPathTemplate": "/doctors/register",
       "UpstreamHttpMethod": [ "POST" ]
-      
+
     },
     {
       "DownstreamPathTemplate": "/api/doctors/{doctorId}/availability",

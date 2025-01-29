@@ -7,11 +7,11 @@
         "Action": "Start"
       },
       {
-        "Path": "..\\..\\..\\..\\..\\Desktop\\CommentsService\\CommentsService\\CommentsService.csproj",
+        "Path": "..\\..\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway.csproj",
         "Action": "Start"
       },
       {
-        "Path": "..\\..\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway\\DoctorAppointmentApiGateway.csproj",
+        "Path": "..\\CommentsService\\CommentsService\\CommentsService.csproj",
         "Action": "Start"
       }
     ]

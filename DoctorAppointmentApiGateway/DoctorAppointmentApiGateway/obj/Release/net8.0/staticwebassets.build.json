@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "ivdXy0JoY+iqjxnrzHpCg8TjbbmE2KsDAIztZTF1eVs=",
+  "Source": "DoctorAppointmentApiGateway",
+  "BasePath": "_content/DoctorAppointmentApiGateway",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

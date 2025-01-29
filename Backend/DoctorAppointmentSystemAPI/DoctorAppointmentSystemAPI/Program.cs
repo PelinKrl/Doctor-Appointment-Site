@@ -117,6 +117,9 @@ builder.Services.AddSingleton<IMongoDatabase>(mongoDatabase);
 builder.Services.AddScoped<IPatientService, PatientService>();
 builder.Services.AddScoped<IDoctorService, DoctorService>();
 builder.Services.AddSingleton<IEmailService, EmailService>();
+builder.Services.AddSingleton<RabbitMQService>();
+builder.Services.AddHostedService<UnfinishedAppointmentProcessor>();
+
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -127,9 +130,16 @@ var app = builder.Build();
 // Middleware Pipeline
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+   
 }
+
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Doctor Appointment System API v1");
+    options.RoutePrefix = string.Empty;
+    
+});
 
 app.UseHttpsRedirection();
 app.UseCors("AllowFrontend");

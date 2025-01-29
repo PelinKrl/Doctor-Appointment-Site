@@ -2,5 +2,6 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ActiveDebugProfile>https</ActiveDebugProfile>
+    <NameOfLastUsedPublishProfile>C:\Users\murat\Documents\GitHub\Doctor-Appointment-Site\Backend\DoctorAppointmentSystemAPI\DoctorAppointmentSystemAPI\Properties\PublishProfiles\DoctorAppointmentSystem - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

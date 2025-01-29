@@ -66,3 +66,4 @@ C:\Users\murat\Documents\GitHub\Doctor-Appointment-Site\DoctorAppointmentApiGate
 C:\Users\murat\Documents\GitHub\Doctor-Appointment-Site\DoctorAppointmentApiGateway\DoctorAppointmentApiGateway\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\murat\Documents\GitHub\Doctor-Appointment-Site\DoctorAppointmentApiGateway\DoctorAppointmentApiGateway\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\murat\Documents\GitHub\Doctor-Appointment-Site\DoctorAppointmentApiGateway\DoctorAppointmentApiGateway\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\murat\Documents\GitHub\Doctor-Appointment-Site\DoctorAppointmentApiGateway\DoctorAppointmentApiGateway\bin\Debug\net8.0\RabbitMQ.Client.dll

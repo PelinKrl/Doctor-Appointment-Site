@@ -84,12 +84,17 @@ var app = builder.Build();
 //  Ensure Swagger is loaded before Ocelot
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
 }
 
+
+
+
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI(options => {
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Doctor Appointment Gateway");
+    options.RoutePrefix = string.Empty;
+});
+//}
 
 // Correct Middleware Order
 app.UseCors("AllowAll");

@@ -254,6 +254,29 @@ class ApiClient {
         });
         return response;
     }
+
+    // Add queueUnfinishedAppointment method
+    async queueUnfinishedAppointment(appointmentData) {
+        await this.ensureInitialized();
+        const token = localStorage.getItem('token');
+        if (!token) {
+            throw new Error('No authentication token found');
+        }
+        this.setAuthToken(token);
+        
+        // Ensure the data is properly formatted
+        const data = {
+            userId: 0,
+            doctorId: 0,
+            selectedDateTime: appointmentData.selectedDateTime,
+            email: appointmentData.email
+        };
+
+        return this.request(this.endpoints.appointments.queueUnfinished, {
+            method: 'POST',
+            body: JSON.stringify(data)
+        });
+    }
 }
 
 // Export a singleton instance

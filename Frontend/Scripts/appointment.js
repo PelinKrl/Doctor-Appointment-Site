@@ -20,6 +20,12 @@ let specialties = [];
 let map;
 let markers = [];
 
+// Add state for selected appointment
+let selectedAppointmentState = {
+    doctorId: null,
+    selectedDateTime: null
+};
+
 // Fetch cities on load
 async function fetchCities() {
     try {
@@ -586,8 +592,11 @@ function getNext7Days() {
     return days;
 }
 
-// Make selectTimeSlot globally accessible
+// Update selectTimeSlot function to store selected appointment state
 window.selectTimeSlot = async function(dateTime, doctorId) {
+    selectedAppointmentState.doctorId = doctorId;
+    selectedAppointmentState.selectedDateTime = dateTime;
+
     const token = localStorage.getItem('token');
     if (!token) {
         Swal.fire({
@@ -627,6 +636,11 @@ window.selectTimeSlot = async function(dateTime, doctorId) {
     // Add click handler for the create appointment button
     document.getElementById('createAppointmentBtn').addEventListener('click', () => {
         createAppointment(doctorId, dateTime);
+        // Clear selected appointment state after successful creation
+        selectedAppointmentState = {
+            doctorId: null,
+            selectedDateTime: null
+        };
     });
 
     // Re-initialize the map since we modified its container
@@ -1160,4 +1174,135 @@ const additionalStyles = `
 `;
 
 // Append the additional styles
-styleSheet.textContent += additionalStyles; 
+styleSheet.textContent += additionalStyles;
+
+// Remove the beforeunload event listener and add navigation handler
+function handleNavigation(targetUrl) {
+    if (selectedAppointmentState.doctorId && selectedAppointmentState.selectedDateTime) {
+        Swal.fire({
+            title: 'Unfinished Appointment',
+            text: 'Would you like to receive a reminder email about your unfinished appointment?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, remind me',
+            cancelButtonText: 'No, thanks',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                try {
+                    const token = localStorage.getItem('token');
+                    if (!token) {
+                        console.error('No token found');
+                        await Swal.fire({
+                            title: 'Authentication Error',
+                            text: 'Please login to set a reminder',
+                            icon: 'error',
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                        window.location.href = 'user_register.html';
+                        return;
+                    }
+
+                    const userJson = localStorage.getItem('user');
+                    if (!userJson) {
+                        console.error('No user data found');
+                        window.location.href = targetUrl;
+                        return;
+                    }
+
+                    const user = JSON.parse(userJson);
+                    if (!user.uid || !user.email) {
+                        console.error('Invalid user data:', user);
+                        window.location.href = targetUrl;
+                        return;
+                    }
+
+                    // Set the token in apiClient before making the request
+                    apiClient.setAuthToken(token);
+
+                    // Create the request data
+                    const requestData = {
+                        userId: 0,
+                        doctorId: 0,
+                        selectedDateTime: new Date(selectedAppointmentState.selectedDateTime).toISOString(),
+                        email: user.email
+                    };
+
+                    console.log('Sending request with data:', requestData);
+                    // Send the request and ignore the response
+                    try {
+                        await apiClient.queueUnfinishedAppointment(requestData);
+                        // Show success message
+                        await Swal.fire({
+                            title: 'Reminder Set',
+                            text: 'You will receive an email reminder about your appointment.',
+                            icon: 'success',
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    } catch (error) {
+                        console.error('Error:', error);
+                        // Don't show error message since the request might have succeeded
+                    }
+                    
+                    // Always navigate to target URL
+                    window.location.href = targetUrl;
+                } catch (error) {
+                    console.error('Error queueing unfinished appointment:', error);
+                    await Swal.fire({
+                        title: 'Error',
+                        text: error.message || 'Failed to set reminder. Please try again later.',
+                        icon: 'error',
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                }
+            } else {
+                // User clicked "No, thanks"
+                window.location.href = targetUrl;
+            }
+        });
+    } else {
+        // No unfinished appointment, proceed with navigation
+        window.location.href = targetUrl;
+    }
+}
+
+// Update all navigation links to use the handler
+document.addEventListener('DOMContentLoaded', function() {
+    // Update all navigation links
+    document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            if (!this.hasAttribute('data-bypass-check')) {
+                e.preventDefault();
+                handleNavigation(this.href);
+            }
+        });
+    });
+
+    // Update navigation buttons
+    const authButton = document.getElementById('auth-button');
+    if (authButton) {
+        const originalOnClick = authButton.onclick;
+        authButton.onclick = function(e) {
+            e.preventDefault();
+            if (selectedAppointmentState.doctorId && selectedAppointmentState.selectedDateTime) {
+                const targetUrl = localStorage.getItem('token') ? 'index.html' : 'user_register.html';
+                handleNavigation(targetUrl);
+            } else {
+                originalOnClick.call(this);
+            }
+        };
+    }
+
+    // Update home button
+    const homeBtn = document.querySelector('.home-btn');
+    if (homeBtn) {
+        homeBtn.onclick = function(e) {
+            e.preventDefault();
+            handleNavigation('index.html');
+        };
+    }
+}); 

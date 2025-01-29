@@ -5,9 +5,9 @@ VisualStudioVersion = 17.12.35514.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorAppointmentSystemAPI", "DoctorAppointmentSystemAPI\DoctorAppointmentSystemAPI.csproj", "{31D50D9E-7A79-4B78-B2E8-767B4A396D93}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommentsService", "..\..\..\..\..\Desktop\CommentsService\CommentsService\CommentsService.csproj", "{2BF3D007-D416-4BD9-AEAB-0CA9C64A2E11}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoctorAppointmentApiGateway", "..\..\DoctorAppointmentApiGateway\DoctorAppointmentApiGateway\DoctorAppointmentApiGateway.csproj", "{247F1082-50B9-4D90-A2E7-27AA730F05C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommentsService", "..\CommentsService\CommentsService\CommentsService.csproj", "{657BD603-944C-4994-BD4C-009FD8408524}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +19,14 @@ Global
 		{31D50D9E-7A79-4B78-B2E8-767B4A396D93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31D50D9E-7A79-4B78-B2E8-767B4A396D93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31D50D9E-7A79-4B78-B2E8-767B4A396D93}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2BF3D007-D416-4BD9-AEAB-0CA9C64A2E11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2BF3D007-D416-4BD9-AEAB-0CA9C64A2E11}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2BF3D007-D416-4BD9-AEAB-0CA9C64A2E11}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2BF3D007-D416-4BD9-AEAB-0CA9C64A2E11}.Release|Any CPU.Build.0 = Release|Any CPU
 		{247F1082-50B9-4D90-A2E7-27AA730F05C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{247F1082-50B9-4D90-A2E7-27AA730F05C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{247F1082-50B9-4D90-A2E7-27AA730F05C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{247F1082-50B9-4D90-A2E7-27AA730F05C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{657BD603-944C-4994-BD4C-009FD8408524}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{657BD603-944C-4994-BD4C-009FD8408524}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{657BD603-944C-4994-BD4C-009FD8408524}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{657BD603-944C-4994-BD4C-009FD8408524}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

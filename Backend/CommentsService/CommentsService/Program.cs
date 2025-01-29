@@ -36,7 +36,10 @@ else
 //if (app.Environment.IsDevelopment())
 //{
     app.UseSwagger();
-    app.UseSwaggerUI();
+app.UseSwaggerUI(options => {
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Comment Service API v1");
+    options.RoutePrefix = string.Empty;
+});
 //}
 
 app.UseHttpsRedirection();

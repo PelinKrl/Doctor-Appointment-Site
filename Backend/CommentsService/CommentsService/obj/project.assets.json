@@ -1272,11 +1272,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\murat\\Desktop\\CommentsService\\CommentsService\\CommentsService.csproj",
+      "projectUniqueName": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\CommentsService\\CommentsService\\CommentsService.csproj",
       "projectName": "CommentsService",
-      "projectPath": "C:\\Users\\murat\\Desktop\\CommentsService\\CommentsService\\CommentsService.csproj",
+      "projectPath": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\CommentsService\\CommentsService\\CommentsService.csproj",
       "packagesPath": "C:\\Users\\murat\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\murat\\Desktop\\CommentsService\\CommentsService\\obj\\",
+      "outputPath": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\CommentsService\\CommentsService\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

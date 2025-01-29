@@ -1,6 +1,6 @@
 {
   "apiGateway": {
-    "baseUrl": "https://localhost:9000",
+    "baseUrl": "https://doctorappointmentgateway-c7h8etdyc8ayb7gs.canadacentral-01.azurewebsites.net",
     "endpoints": {
       "auth": {
         "patientLogin": "/auth/patient-login",
@@ -26,6 +26,9 @@
         "getReviews": "/comments/reviews/{doctorId}",
         "addReview": "/comments/add-review",
         "checkInappropriate": "/comments/check-inappropriate"
+      },
+      "appointments": {
+        "queueUnfinished": "/appointments/queue-unfinished"
       }
     }
   }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pJpAtFXWuKY=",
+  "dgSpecHash": "qlHKnq5pCmg=",
   "success": true,
-  "projectFilePath": "C:\\Users\\murat\\Desktop\\CommentsService\\CommentsService\\CommentsService.csproj",
+  "projectFilePath": "C:\\Users\\murat\\Documents\\GitHub\\Doctor-Appointment-Site\\Backend\\CommentsService\\CommentsService\\CommentsService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\murat\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",
     "C:\\Users\\murat\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\8.0.0\\microsoft.aspnetcore.jsonpatch.8.0.0.nupkg.sha512",

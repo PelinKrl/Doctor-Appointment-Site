@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "AppointmentController",
+    "Method": "QueueUnfinishedAppointment",
+    "RelativePath": "api/appointments/queue-unfinished",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "appointment",
+        "Type": "UnfinishedAppointmentDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "AuthController",
     "Method": "AdminLogin",
     "RelativePath": "api/Auth/admin-login",
