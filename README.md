@@ -53,9 +53,9 @@ The **Doctor Appointment System** is designed as a **microservices-based archite
   - **API Gateway security** for centralized access control.
 
 ### 🚀 **Deployment & Scaling**
-- **Containerized using Docker** for easy deployment and management.
-- **Kubernetes (K8s) or Docker Swarm** for orchestration in production.
-- **CI/CD pipeline** for automated testing and deployment.
 - **Cloud-based deployment** (Azure) for high availability.
+- Azure App Service for Backend: DoctorAppointmentSystem, CommentService, DoctorAppointmentSystemAPIGateway
+- Azure Static Web App for frontend.
+- CloudAMPQ for RabbitMq
 
 This architecture ensures a **modular**, **scalable**, and **efficient** Doctor Appointment System, separating concerns and optimizing performance.
