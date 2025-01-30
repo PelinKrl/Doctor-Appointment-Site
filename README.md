@@ -58,4 +58,9 @@ The **Doctor Appointment System** is designed as a **microservices-based archite
 - Azure Static Web App for frontend.
 - CloudAMPQ for RabbitMq
 
+### 🔗 **URLS**
+Doctor Appointment System Backend url: https://doctorappointmentsystem-bshnaghuewagf2g2.canadacentral-01.azurewebsites.net/index.html
+Comment Service Url: https://commentservice-h4cbfpg3dzhxbnfv.canadacentral-01.azurewebsites.net/index.html
+Frontend url: https://calm-plant-00f614e0f.4.azurestaticapps.net/
+
 This architecture ensures a **modular**, **scalable**, and **efficient** Doctor Appointment System, separating concerns and optimizing performance.
